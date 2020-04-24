@@ -1,0 +1,6 @@
+alias sa="script/aava"
+alias xcp="kitty +kitten clipboard"
+alias gdiff="git difftool --no-symlinks --dir-diff"
+alias img="kitty +kitten icat"
+alias apti="sudo apt-get install"
+alias apts="apt-cache search"
