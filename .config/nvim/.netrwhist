@@ -1,0 +1,8 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =6
+let g:netrw_dirhist_6='/home/smaipe/.config/regolith/i3xrocks/i3blocks-contrib/.git'
+let g:netrw_dirhist_5='/home/smaipe/.config/regolith/i3xrocks/i3blocks-contrib'
+let g:netrw_dirhist_4='/home/smaipe/.config/regolith/i3xrocks'
+let g:netrw_dirhist_3='/home/smaipe/.config/regolith'
+let g:netrw_dirhist_2='/home/smaipe/.config/regolith/i3/awesome-i3-auto-layout'
+let g:netrw_dirhist_1='/home/smaipe/.config/regolith/i3'

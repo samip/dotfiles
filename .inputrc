@@ -5,7 +5,4 @@
 #bindkey "^[[6~" history-beginning-search-forward
 #"\C-p": reverse-search-history
 #"\C-s": forward-search-history
-#set editing-mode vi
-#set show-mode-in-prompt on
-#set vi-ins-mode-string \1\e[6 q\2
-#set vi-cmd-mode-string \1\e[2 q\2
+
