@@ -1,19 +1,23 @@
 source ~/.config/zsh/vim
+source ~/.fzf/shell/key-bindings.zsh # bind alt+r etc
 source ~/.bash_aliases
 # source ~/.fzf.bash # fuzzy finder
 export FZF_BASE=/home/sami/.fzf/
-
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 xset r rate 250 30
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
-
+export ZSH_THEME=minimal
+setopt noautomenu
+setopt nomenucomplete
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="agnoster"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -74,9 +78,8 @@ ZSH_THEME="agnoster"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git fzf)
-
 source $ZSH/oh-my-zsh.sh
-
+bindkey -v
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -91,6 +94,7 @@ source $ZSH/oh-my-zsh.sh
 #   export EDITOR='mvim'
 # fi
 export EDITOR='nvim'
+export PAGER='most'
 export PATH=/home/sami/Scripts:$PATH
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -104,4 +108,5 @@ export PATH=/home/sami/Scripts:$PATH
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 source /home/sami/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /home/sami/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+setxkbmap -option caps:escape
