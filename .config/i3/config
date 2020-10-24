@@ -5,17 +5,22 @@
 # this file and re-run i3-config-wizard(1).
 #
 
+
+
+for_window [class="kitty"] border pixel 2
+for_window [class="Telegram"] border pixel 2
+for_window [class="Spotify"] border pixel 2
+for_window [class="Vivaldi"] border pixel 2
+
+
+
+
 # i3 config file (v4)
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
-set $mod Mod1
-set $win Mod4
-# custom
-#
-gaps inner 10
-gaps outer 0
-smart_gaps on
+# client.focused          #00ff00 #285577 #FFFFFF #2222cc   #2222cc
+
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below. ISO 10646 = Unicode
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -29,22 +34,32 @@ hide_edge_borders both
 # Use Mouse+$mod to drag floating windows to their wanted position
 # floating_modifier $mod
 
+workspace_auto_back_and_forth yes
+bindsym $mod+enter exec "kitty"
 bindsym $win+Shift+h move workspace to output left
 bindsym $win+Shift+l move workspace to output right
-
+bindsym $mod+r exec "kitty -e ranger"
+bindsym $mod+t exec "telegram-desktop"
 bindsym $mod+Pause exec "systemctl suspend"
-bindsym $win+Tab exec "rofi -show drun"
-bindsym $mod+Tab exec "rofi -show window"
+bindsym $mod+$win+Delete exec "systemctl suspend"
+bindsym $win+Tab exec --no-startup-id "rofi -show drun"
+bindsym $mod+Tab exec rofi -show window
 bindsym $mod+Insert exec vivaldi-snapshot
+bindsym $mod+y exec --no-startup-id 'i3-msg workspace 4; exec vivaldi-snapshot --load-extension=/home/sami/Documents/vivaldi-treetabs/dist/chrome/ --flag-switches-begin --debug-packed-apps --silent-debugger-extension-api --flag-switches-end'
 # start a terminal
 bindsym $mod+Return exec kitty 
 exec_always --no-startup-id "/opt/autotiling/autotiling.py"
 exec --no-startup-id redshift 
-
+exec --no-startup-id compton
+for_window [class="Steam"] floating enable
+for_window [class="Gimp"] floating enable
+for_window [class="PlayOnLinux"] floating enable
+for_window [class="mpv"] float enable
 exec xautolock -time 30 -locker 'systemctl suspend'
+exec --no-startup-id nm-applet
 # kill focused window
 bindsym $mod+Shift+q kill
-bindsym $mod+z exec "kitty sh -c nvim"
+bindsym $win+e exec "kitty bash -c nvim"
 # start dmenu (a program launcher)
 bindsym $win+d exec dmenu_run
 # There also is the (new) i3-dmenu-desktop which only displays applications
@@ -58,6 +73,23 @@ bindsym $mod+o exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spoti
 bindsym $mod+p exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next"
 bindsym $mod+i exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous"
 
+# Pulse Audio controls
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+
+# Sreen brightness controls
+bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
+
+# Touchpad controls
+bindsym XF86TouchpadToggle exec /some/path/toggletouchpad.sh # toggle touchpad
+
+# Media player controls
+bindsym XF86AudioPlay exec playerctl play
+bindsym XF86AudioPause exec playerctl pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
 # Make the currently focused window a scratchpad
 bindsym $mod+Shift+minus move scratchpad
 
@@ -103,7 +135,8 @@ bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
-# toggle tiling / floating
+bindsym $mod+Shit+s sticky toggle
+
 bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
@@ -115,6 +148,17 @@ bindsym $mod+a focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
+
+workspace 1 output HDMI-0
+workspace 3 output HDMI-0
+workspace 5 output HDMI-0
+workspace 7 output HDMI-0
+workspace 9 output HDMI-0
+workspace 2 output HDMI-1-1
+workspace 4 output HDMI-1-1
+workspace 6 output HDMI-1-1
+workspace 8 output HDMI-1-1
+workspace 10 output HDMI-1-1
 # switch to workspace
 bindsym $mod+1 workspace 1
 bindsym $mod+2 workspace 2
@@ -144,8 +188,14 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-# bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 # resize window (you can also use the mouse for that)
+
+bindsym $win+h resize grow width 10px or 10 ppt
+bindsym $win+l resize shrink width 10px or 10 ppt
+bindsym $win+j resize grow height 10px or 10ppt
+bindsym $win+k resize shrink height 10px or 10ppt
+
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
 
@@ -169,14 +219,8 @@ mode "resize" {
         bindsym Escape mode "default"
 }
 
-bindsym $mod+r mode "resize"
+# bindsym $mod+r mode "resize"
 
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-exec --no-startup-id compton
-# exec_always --no-startup-id $HOME/.config/polybar/launch.sh
-
-bar {
-        tray_output DVI-D-0
-        status_command i3status
-}
