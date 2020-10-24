@@ -110,3 +110,5 @@ export PATH=/home/sami/Scripts:$PATH
 source /home/sami/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 setxkbmap -option caps:escape
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

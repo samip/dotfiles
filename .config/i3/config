@@ -4,14 +4,17 @@
 # Should you change your keyboard layout some time, delete
 # this file and re-run i3-config-wizard(1).
 #
+set $mod Mod1
+set $win Mod4
 
 
+for_window [class="kitty"] border pixel 4
+for_window [class="Telegram"] border pixel 4
+for_window [class="Spotify"] border pixel 4
+for_window [class="Vivaldi"] border pixel 4
 
-for_window [class="kitty"] border pixel 2
-for_window [class="Telegram"] border pixel 2
-for_window [class="Spotify"] border pixel 2
-for_window [class="Vivaldi"] border pixel 2
-
+gaps inner 10
+smart_gaps on
 
 
 
@@ -19,7 +22,7 @@ for_window [class="Vivaldi"] border pixel 2
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
-# client.focused          #00ff00 #285577 #FFFFFF #2222cc   #2222cc
+client.focused          #00ff00 #d79921 #FFFFFF #d79921 #d79921
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below. ISO 10646 = Unicode
@@ -35,7 +38,6 @@ hide_edge_borders both
 # floating_modifier $mod
 
 workspace_auto_back_and_forth yes
-bindsym $mod+enter exec "kitty"
 bindsym $win+Shift+h move workspace to output left
 bindsym $win+Shift+l move workspace to output right
 bindsym $mod+r exec "kitty -e ranger"
@@ -47,7 +49,7 @@ bindsym $mod+Tab exec rofi -show window
 bindsym $mod+Insert exec vivaldi-snapshot
 bindsym $mod+y exec --no-startup-id 'i3-msg workspace 4; exec vivaldi-snapshot --load-extension=/home/sami/Documents/vivaldi-treetabs/dist/chrome/ --flag-switches-begin --debug-packed-apps --silent-debugger-extension-api --flag-switches-end'
 # start a terminal
-bindsym $mod+Return exec kitty 
+bindsym $mod+Return exec "kitty --single-instance"
 exec_always --no-startup-id "/opt/autotiling/autotiling.py"
 exec --no-startup-id redshift 
 exec --no-startup-id compton
@@ -149,11 +151,11 @@ bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
 
-workspace 1 output HDMI-0
-workspace 3 output HDMI-0
-workspace 5 output HDMI-0
-workspace 7 output HDMI-0
-workspace 9 output HDMI-0
+workspace 1 output DVI-D-0
+workspace 3 output DVI-D-0
+workspace 5 output DVI-D-0
+workspace 7 output DVI-D-0
+workspace 9 output DVI-D-0
 workspace 2 output HDMI-1-1
 workspace 4 output HDMI-1-1
 workspace 6 output HDMI-1-1
@@ -221,6 +223,7 @@ mode "resize" {
 
 # bindsym $mod+r mode "resize"
 
+exec_always compton
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)

@@ -1,14 +1,19 @@
+setxkbmap -option caps:escape
+setxkbmap -option "nbsp:none"
+
+
+PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
+export TERMINAL=kitty
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
-source /opt/aava/etc/aava.profile && aava-chome /home/sami/environment/system
+# source /opt/aava/etc/aava.profile && aava-chome /home/sami/environment/system
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
       *) return;;
 esac
-export EDITOR=vim
-tput smkx # for st delete key to work
+
 
 # turha? ks ~/.inputrc
 # set -o vi
@@ -33,7 +38,7 @@ shopt -s checkwinsize
 #shopt -s globstar
 
 # make less more friendly for non-text input files, see lesspipe(1)
-[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+# [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 # set variable identifying the chroot you work in (used in the prompt below)
 if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
@@ -68,14 +73,6 @@ else
 fi
 unset color_prompt force_color_prompt
 
-# If this is an xterm set the title to user@host:dir
-case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
-*)
-    ;;
-esac
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -121,16 +118,18 @@ if ! shopt -oq posix; then
   fi
 fi
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin:$HOME/Scripts"
 export TERM="screen-256color"
-
+export EDITOR="nvim"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-xset r rate 200 25
+# xset r rate 250 25
+
+# first number: ms before repeat, second number: repeats per second
+xset r rate 200 40
 # export PS1="\e[0;36m[\u@\h \W]\$ \e[m"
 # get current branch in git repo
 function parse_git_branch() {
@@ -179,3 +178,5 @@ function parse_git_dirty {
 	fi
 }
 export PS1="[\[\e[34m\]\u\[\e[m\]\[\e[36m\]@\[\e[m\]\[\e[34m\]\h\[\e[m\]]\\$ \[\e[36m\]\W\[\e[m\]\[\e[32m\]\`parse_git_branch\`\[\e[m\] "
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

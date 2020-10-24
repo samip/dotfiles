@@ -19,7 +19,7 @@
 [colors]
 ;background = ${xrdb:color0:#222}
 background = #222
-background-alt = #444
+background-alt = #5e5e5e
 ;foreground = ${xrdb:color7:#222}
 foreground = #dfdfdf
 foreground-alt = #555
@@ -28,9 +28,12 @@ secondary = #e60053
 alert = #bd2c40
 
 [bar/example]
-monitor = ${env:MONITOR:DVI-D-0}
+monitor = ${env:MONITOR:HDMI-0}
+
+; monitor = ${env:MONITOR:}
 width = 100%
 height = 27
+override-redirect = false
 ;offset-x = 1%
 ;offset-y = 1%
 radius = 6.0
@@ -54,12 +57,11 @@ module-margin-right = 2
 font-0 = fixed:pixelsize=10;1
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = siji:pixelsize=10;1
-
+wm-restack = i3
 modules-left = i3
 ;modules-center = mpd
 modules-right = alsa cpu temperature date powermenu
 
-tray-position = right
 tray-padding = 2
 ;tray-background = #0063ff
 
@@ -76,6 +78,47 @@ tray-padding = 2
 
 cursor-click = pointer
 cursor-scroll = ns-resize
+
+[bar/left]
+background = ${colors.background}
+foreground = ${colors.foreground}
+; required by spotify module
+enable-ipc = true
+monitor = DVI-D-0
+module-margin-right = 2
+modules-left = i3
+modules-center = xwindow
+modules-right = spotify-play-pause alsa cpu temperature date powermenu
+tray-position = right
+tray-padding = 10
+wm-restack = i3
+font-0 = fixed:pixelsize=10;1
+font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
+font-2 = siji:pixelsize=10;1
+[bar/right]
+monitor = HDMI-1-1
+modules-center = xwindow
+modules-left = i3
+wm-restack = i3
+font-0 = fixed:pixelsize=10;1
+font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
+font-2 = siji:pixelsize=10;1
+
+[module/spotify-play-pause]
+type = custom/ipc
+hook-0 = echo ">"
+hook-1 = echo "x"
+initial = 1
+click-left = playerctl play-pause spotify
+
+[module/spotify]
+type = custom/ipc
+hook-0 = echo ""
+hook-1 = python3 ~/scripts/spotify/spotify_status.py
+initial = 1
+format-padding = 4
+format-underline = #1db954
+line-size = 1
 
 [module/xwindow]
 type = internal/xwindow
@@ -136,7 +179,7 @@ index-sort = true
 wrapping-scroll = false
 
 ; Only show workspaces on the same output as the bar
-pin-workspaces = false
+pin-workspaces = true
 
 label-mode-padding = 2
 label-mode-foreground = #000
@@ -164,7 +207,7 @@ label-urgent-background = ${colors.alert}
 label-urgent-padding = 2
 
 ; Separator in between workspaces
-; label-separator = |
+; label-separatorp= |
 
 
 [module/mpd]
