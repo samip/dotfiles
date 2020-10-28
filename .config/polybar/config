@@ -96,6 +96,9 @@ font-0 = fixed:pixelsize=10;1
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = siji:pixelsize=10;1
 [bar/right]
+background = ${colors.background}
+foreground = ${colors.foreground}
+
 monitor = HDMI-1-1
 modules-center = xwindow
 modules-left = i3
@@ -122,7 +125,7 @@ line-size = 1
 
 [module/xwindow]
 type = internal/xwindow
-label = %title:0:30:...%
+label = %title:0:300:...%
 
 [module/xkeyboard]
 type = internal/xkeyboard

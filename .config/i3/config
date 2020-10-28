@@ -22,7 +22,7 @@ smart_gaps on
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
-client.focused          #00ff00 #d79921 #FFFFFF #d79921 #d79921
+# client.focused          #00ff00 #d79921 #FFFFFF #d79921 #d79921
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below. ISO 10646 = Unicode
