@@ -102,6 +102,7 @@ foreground = ${colors.foreground}
 monitor = HDMI-1-1
 modules-center = xwindow
 modules-left = i3
+modules-right = date
 wm-restack = i3
 font-0 = fixed:pixelsize=10;1
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
@@ -125,7 +126,7 @@ line-size = 1
 
 [module/xwindow]
 type = internal/xwindow
-label = %title:0:300:...%
+label = %title:0:70:...%
 
 [module/xkeyboard]
 type = internal/xkeyboard

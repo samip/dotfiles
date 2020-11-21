@@ -8,11 +8,12 @@ set $mod Mod1
 set $win Mod4
 
 
-for_window [class="kitty"] border pixel 4
-for_window [class="Telegram"] border pixel 4
-for_window [class="Spotify"] border pixel 4
-for_window [class="Vivaldi"] border pixel 4
-
+# for_window [class="kitty"] border pixel 4
+# for_window [class="Telegram"] border pixel 4
+# for_window [class="Spotify"] border pixel 4
+# for_window [class="Vivaldi"] border pixel 4
+for_window [class="Nemo"]  floating enable
+for_window [class="^.*"]  border pixel 4
 gaps inner 10
 smart_gaps on
 
@@ -22,7 +23,7 @@ smart_gaps on
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
-# client.focused          #00ff00 #d79921 #FFFFFF #d79921 #d79921
+client.focused          #00ff00 #d79921 #FFFFFF #d79921 #d79921
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below. ISO 10646 = Unicode
@@ -41,10 +42,12 @@ workspace_auto_back_and_forth yes
 bindsym $win+Shift+h move workspace to output left
 bindsym $win+Shift+l move workspace to output right
 bindsym $mod+r exec "kitty -e ranger"
-bindsym $mod+t exec "telegram-desktop"
+bindsym $mod+t exec "/home/sami/Scripts/i3-activate-window.sh telegram-desktop"
+bindsym $win+s exec "spotify"
 bindsym $mod+Pause exec "systemctl suspend"
 bindsym $mod+$win+Delete exec "systemctl suspend"
 bindsym $win+Tab exec --no-startup-id "rofi -show drun"
+bindsym $win+0 i3-msg workspace 2 && xdotool windowfocus --sync 60817413
 bindsym $mod+Tab exec rofi -show window
 bindsym $mod+Insert exec vivaldi-snapshot
 bindsym $mod+y exec --no-startup-id 'i3-msg workspace 4; exec vivaldi-snapshot --load-extension=/home/sami/Documents/vivaldi-treetabs/dist/chrome/ --flag-switches-begin --debug-packed-apps --silent-debugger-extension-api --flag-switches-end'
@@ -130,7 +133,7 @@ bindsym $mod+m split h
 bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen
+bindsym $win+f fullscreen
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking

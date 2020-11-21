@@ -111,6 +111,15 @@ function! Escape(stuff)
     return substitute(escape(a:stuff, '\/.*$^~[]'), "\n", '\\n', "g")
 endfunction
 
+"smart indent when entering insert mode with i on empty lines
+function! IndentWithI()
+    if len(getline('.')) == 0
+        return "\"_ccO"
+    else
+        return "i"
+    endif
+endfunction
+nnoremap <expr> i IndentWithI()
 
 nnoremap <silent> ä :vertical resize +5<CR>
 nnoremap <silent> Ä :vertical resize -5<CR>
