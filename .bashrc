@@ -121,6 +121,8 @@ fi
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin:$HOME/Scripts"
+export PATH="$PATH:/opt/flutter/bin"
+
 export TERM="screen-256color"
 export EDITOR="nvim"
 export NVM_DIR="$HOME/.nvm"

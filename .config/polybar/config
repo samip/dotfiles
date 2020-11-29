@@ -100,9 +100,11 @@ background = ${colors.background}
 foreground = ${colors.foreground}
 
 monitor = HDMI-1-1
-modules-center = xwindow
+
+
+; modules-center = xwindow
 modules-left = i3
-modules-right = date
+modules-right = filesystem date
 wm-restack = i3
 font-0 = fixed:pixelsize=10;1
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0

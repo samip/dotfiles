@@ -34,13 +34,11 @@ client.focused          #00ff00 #d79921 #FFFFFF #d79921 #d79921
 # chose a FreeType font, such as:
 font pango:DejaVu Sans Mono 10
 # default_border pixel 0
-hide_edge_borders both
+# hide_edge_borders both
 # Use Mouse+$mod to drag floating windows to their wanted position
 # floating_modifier $mod
 
 workspace_auto_back_and_forth yes
-bindsym $win+Shift+h move workspace to output left
-bindsym $win+Shift+l move workspace to output right
 bindsym $mod+r exec "kitty -e ranger"
 bindsym $mod+t exec "/home/sami/Scripts/i3-activate-window.sh telegram-desktop"
 bindsym $win+s exec "spotify"
@@ -56,10 +54,14 @@ bindsym $mod+Return exec "kitty --single-instance"
 exec_always --no-startup-id "/opt/autotiling/autotiling.py"
 exec --no-startup-id redshift 
 exec --no-startup-id compton
-for_window [class="Steam"] floating enable
+# for_window [class="Steam"] floating enable
 for_window [class="Gimp"] floating enable
 for_window [class="PlayOnLinux"] floating enable
 for_window [class="mpv"] float enable
+bindsym $win+§ [class="Telegram"] focus
+bindsym  $win+1 [class="discord"] focus
+bindsym  $win+2 [class="Telegram"] focus
+bindsym  $win+3 [class="Spotify"] focus
 exec xautolock -time 30 -locker 'systemctl suspend'
 exec --no-startup-id nm-applet
 # kill focused window
