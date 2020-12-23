@@ -14,6 +14,9 @@ set $win Mod4
 # for_window [class="Vivaldi"] border pixel 4
 for_window [class="Nemo"]  floating enable
 for_window [class="^.*"]  border pixel 4
+for_window [class="mpv"] floating enable
+for_window [title="Vivaldi Settings"] floating enable
+# for_window [title="Private Window"] fullscreen enable
 gaps inner 10
 smart_gaps on
 
@@ -62,7 +65,7 @@ bindsym $win+§ [class="Telegram"] focus
 bindsym  $win+1 [class="discord"] focus
 bindsym  $win+2 [class="Telegram"] focus
 bindsym  $win+3 [class="Spotify"] focus
-exec xautolock -time 30 -locker 'systemctl suspend'
+exec xautolock -time 90 -locker 'systemctl suspend'
 exec --no-startup-id nm-applet
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -225,7 +228,9 @@ mode "resize" {
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
-
+mode "gaming" {
+  bindsym $mod1 nop
+}
 # bindsym $mod+r mode "resize"
 
 exec_always compton

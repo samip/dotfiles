@@ -14,6 +14,9 @@ case $- in
       *) return;;
 esac
 
+# instant bash history
+shopt -s histappend
+PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
 
 # turha? ks ~/.inputrc
 # set -o vi
@@ -21,9 +24,6 @@ esac
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
-
-# append to the history file, don't overwrite it
-shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 HISTSIZE=
@@ -117,7 +117,21 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+#ctrl + G directory up
+bind '"\C-g":"cd ..\C-m"'
+# bind ctrl-E to "edit fuzzy"
+function edit_fuzzy {
+  TARGET=$(fzf)
+  if [ $? -eq 0 ]
+  then
+    echo -e "${PS1@P}edit $TARGET"
+    history -s "edit $TARGET"
+    nvim "$TARGET"
+    READLINE_LINE=""
+  fi
+}
 
+bind -x '"\C-e":edit_fuzzy'
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin:$HOME/Scripts"

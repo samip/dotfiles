@@ -10,6 +10,9 @@ set ic
 set incsearch
 set showcmd
 " open new splits in right and below
+
+" disable auto-comment
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 set splitbelow
 set splitright
 set list " show white space
@@ -75,6 +78,7 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'junegunn/vim-peekaboo'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'AndrewRadev/splitjoin.vim'
+Plugin 'PotatoesMaster/i3-vim-syntax'
 " All of your Plugins must be added before the following line
 "
 call vundle#end()            " required
