@@ -9,12 +9,15 @@ alias vs="cd /opt/vivaldi-snapshot/resources/vivaldi"
 alias :q="exit"
 alias x="xdg-open"
 alias dc='docker-compose --env-file .env.webpack'
-alias cb='cd ~/Documents/custobar/custobar'
 alias dragon="dragon 2>/dev/null"
-alias :v="(cd ~/.config/nvim/ && nvim init.lua)"
+alias :v="(cd ~/.config/nvim/ && nvim init.lua lua/*)"
 alias :i="(cd ~/.config/regolith/i3/ && nvim config)"
 alias upd="sudo apt update && sudo apt upgrade"
+alias ll="lsd -la"
+alias ls="lsd"
+alias lt="lsd -a --tree"
+alias dots="cd ~/Documents/dotfiles"
 
-oc() {
-    nvim $(git diff main.. --name-only | grep -e '\.vue$|\.js$')
-}
+#oc() {
+    #nvim $(git diff main.. --name-only | grep -e '\.vue$|\.js$')
+#}
