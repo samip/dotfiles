@@ -1,0 +1,22 @@
+#!/bin/sh
+
+# Login info for raspberry pi
+rasp_user="root"
+rasp_host="libreELEC"
+
+case $1 in
+  off|standby)
+    command="standby"
+  ;;
+  on)
+    command="on"
+  ;;
+  *)
+    echo "Unknown command"
+    exit 0
+esac
+
+notify-send "TV $command"
+
+# Send on/standby command through HDMI CEC
+ssh "$rasp_user@$rasp_host" "echo '$command 0.0.0.1' | cec-client -s -d 1"
