@@ -21,3 +21,8 @@ alias dots="cd ~/Documents/dotfiles"
 #oc() {
     #nvim $(git diff main.. --name-only | grep -e '\.vue$|\.js$')
 #}
+
+function goto() {
+    shortcut_locations="$HOME/.config/shortcut-locations"
+    test -f "$shortcut_locations" && cd "$(cat $shortcut_locations | fzf)"
+}
