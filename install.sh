@@ -2,7 +2,7 @@
 
 add-apt-repository ppa:neovim-ppa/unstable
 apt-get update
-apt-get install -y tmux stew tig neovim xclip bat git
+apt-get install -y tmux stew tig neovim xclip bat git fzf
 
 # https://github.com/mwh/dragon
 
