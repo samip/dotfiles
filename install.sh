@@ -1,8 +1,12 @@
+#!/bin/sh
+
 add-apt-repository ppa:neovim-ppa/unstable
 apt-get update
 apt-get install -y tmux stew tig neovim xclip bat git
 
 # https://github.com/mwh/dragon
+
+curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
 
 git config --global alias.st status
 git config --global alias.last 'log -1 HEAD'
