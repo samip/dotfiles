@@ -74,6 +74,7 @@ exec([[
 require('telescope').load_extension('fzf')
 require'nvim-treesitter.configs'.setup {
   highlight = {
+    ensure_installed = { 'vue', 'javascript', 'lua' },
     enable = true,
     custom_captures = {
       -- Highlight the @foo.bar capture group with the "Identifier" highlight group.
@@ -85,6 +86,9 @@ require'nvim-treesitter.configs'.setup {
     -- Instead of true it can also be a list of languages
     additional_vim_regex_highlighting = false,
   },
+  incremental_selection = { enable = true },
+  indent = { enable = true },
+  context_commentstring = { enable = true }
 }
 
 ----  autocmd FileType help wincmd L
