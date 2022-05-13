@@ -15,7 +15,7 @@ return require('packer').startup(function()
   -- use 'majutsushi/tagbar'
   use 'markonm/traces.vim' -- :s live preview
   use 'moll/vim-node'
-  use 'scrooloose/nerdcommenter'
+  use 'tpope/vim-commentary'
   use 'stephpy/vim-yaml'
   use 'tpope/vim-eunuch'
   use 'tpope/vim-fugitive'
@@ -51,6 +51,7 @@ return require('packer').startup(function()
   use 'preservim/nerdtree'
   --use { "beauwilliams/focus.nvim", config = function() require("focus").setup() end }
   use 'airblade/vim-gitgutter'
+  use 'RRethy/nvim-treesitter-textsubjects'
   use 'JoosepAlviste/nvim-ts-context-commentstring'
   use {'junegunn/fzf', dir = '~/.fzf', run = './install --all' }
   use 'dense-analysis/ale'

@@ -72,6 +72,7 @@ exec([[
 ]], false)
 
 require('telescope').load_extension('fzf')
+
 require'nvim-treesitter.configs'.setup {
   highlight = {
     ensure_installed = { 'vue', 'javascript', 'lua' },
@@ -86,9 +87,26 @@ require'nvim-treesitter.configs'.setup {
     -- Instead of true it can also be a list of languages
     additional_vim_regex_highlighting = false,
   },
-  incremental_selection = { enable = true },
   indent = { enable = true },
   context_commentstring = { enable = true }
+}
+
+require'nvim-treesitter.configs'.setup {
+  incremental_selection = {
+    enable = true,
+    keymaps = {
+      init_selection = "gnn",
+      node_incremental = "grn",
+      scope_incremental = "grc",
+      node_decremental = "grm",
+    },
+  },
+}
+
+require'nvim-treesitter.configs'.setup {
+  context_commentstring = {
+    enable = true
+  }
 }
 
 ----  autocmd FileType help wincmd L
@@ -112,6 +130,17 @@ cmd [[
   autocmd FileType xml,html,xhtml,css,scss,javascript,lua,yaml setlocal shiftwidth=2 tabstop=2
 ]]
 
+cmd [[augroup _git
+    autocmd!
+    autocmd FileType gitcommit setlocal wrap
+    autocmd FileType gitcommit setlocal spell
+  augroup end
+  augroup _markdown
+    autocmd!
+    autocmd FileType markdown setlocal wrap
+    autocmd FileType markdown setlocal spell
+  augroup end
+]]
 -----------------------------------------------------------
 -- Memory, CPU
 -----------------------------------------------------------

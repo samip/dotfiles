@@ -22,3 +22,6 @@ fi
 
 cat "$PWD/init/.bash_history" >> ~/.bash_history
 cat "$PWD/init/.config/shortcut-locations" >> ~/.config/shortcut-locations
+
+# source ~/.bashrc
+tmux source-file ~/.tmux.conf
