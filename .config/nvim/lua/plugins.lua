@@ -48,7 +48,6 @@ return require('packer').startup(function()
   use 'ms-jpq/coq_nvim'
   --use { 'ms-jpq/coq.artifacts', branch = 'artifacts' }
   --use 'psliwka/vim-smoothie'
-  use 'preservim/nerdtree'
   --use { "beauwilliams/focus.nvim", config = function() require("focus").setup() end }
   use 'airblade/vim-gitgutter'
   use 'RRethy/nvim-treesitter-textsubjects'
