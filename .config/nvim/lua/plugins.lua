@@ -27,6 +27,7 @@ return require('packer').startup(function()
   use 'vim-airline/vim-airline'
 
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+  use 'nvim-treesitter/playground'
   use 'neovim/nvim-lspconfig'
   use 'kabouzeid/nvim-lspinstall'
   use {
