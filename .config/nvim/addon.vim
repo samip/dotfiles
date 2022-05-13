@@ -25,3 +25,4 @@ nnoremap <leader>gm :lua require('telescope').extensions.git_worktree.create_git
 
 set tabstop=4
 set shiftwidth=4
+set noswapfile
