@@ -19,3 +19,5 @@ nvim $(git diff main.. --name-only) # Open changed files in vim
 nvim $(git diff main.. --name-only | grep -E '\.vue|\.js$|\.py') # Open changed .vue .js .py
 
 i3-msg reload && i3-msg restart # i3 reload config restart
+
+git log -L110,110:/lib/client.js # Show log for certain line
