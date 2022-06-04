@@ -5,6 +5,8 @@ apt-get update
 apt-get install -y tmux stew tig neovim xclip bat git fzf zsh
 
 # https://github.com/mwh/dragon
+git clone https://github.com/jeffreytse/zsh-vi-mode \
+  $ZSH_CUSTOM/plugins/zsh-vi-mode
 
 curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
