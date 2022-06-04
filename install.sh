@@ -13,6 +13,7 @@ git config --global alias.st status
 git config --global alias.last 'log -1 HEAD'
 git config --global alias.ll log --oneline
 git config --global alias.d diff
+git config --global core.editor nvim
 
 if ! command -v lsd > /dev/null
 then
