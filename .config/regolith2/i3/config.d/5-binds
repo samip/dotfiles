@@ -1,0 +1,9 @@
+bindcode $mod+Shift+49 move to scratchpad
+bindcode $mod+49 scratchpad show
+
+bindsym $mod+Shift+ä exec "ssh pi@192.168.100.35 tv_on"
+bindsym $mod+Shift+å exec "ssh pi@192.168.100.35 tv_off"
+
+bindsym $mod+F12 exec "~/Scripts/rofi-pulse"
+bindsym $alt+c exec gnome-calendar
+bindsym $alt+p exec "kitty -e python"
