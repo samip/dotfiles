@@ -19,10 +19,10 @@ nnoremap q: :lua require('telescope.builtin').command_history()<CR>
 nnoremap <leader>vrc :lua require('theprimeagen.telescope').search_dotfiles()<CR>
 nnoremap <leader>va :lua require('theprimeagen.telescope').anime_selector()<CR>
 nnoremap <leader>vc :lua require('theprimeagen.telescope').chat_selector()<CR>
-nnoremap <leader>gc :lua require('theprimeagen.telescope').git_branches()<CR>
 nnoremap <leader>gw :lua require('telescope').extensions.git_worktree.git_worktrees()<CR>
 nnoremap <leader>gm :lua require('telescope').extensions.git_worktree.create_git_worktree()<CR>
 
 set tabstop=4
 set shiftwidth=4
+set expandtab
 set noswapfile
