@@ -19,6 +19,15 @@ g.maplocalleader = ','
 require('plugins')
 require('lsp')
 require('telescope_settings')
+
+vim.lsp.handlers["textDocument/publishDiagnostics"] =
+  vim.lsp.with(
+  vim.lsp.diagnostic.on_publish_diagnostics,
+  {
+    underline = false
+  }
+)
+require("mason").setup()
 -- the loading is important
 -- To get fzf loaded and working with telescope, you need to call
 -- load_extension, somewhere after setup function:
@@ -29,9 +38,7 @@ vim.g.coq_settings = {
 }
 --require'lspconfig'.tsserver.setup{ root_dir = vim.loop.cwd }
 
--- lua require'nvim-treesitter.configs'.setup { highlight = { enable = true } }
 --
-require('nvim-ts-autotag').setup()
 
 cmd('set termguicolors')
 require'colorizer'.setup()
@@ -75,23 +82,14 @@ require('telescope').load_extension('fzf')
 
 require'nvim-treesitter.configs'.setup {
   highlight = {
-    ensure_installed = { 'vue', 'javascript', 'lua' },
+    ensure_installed = { 'vue', 'javascript', 'lua', 'python', 'scss', 'css' },
     enable = true,
-    custom_captures = {
-      -- Highlight the @foo.bar capture group with the "Identifier" highlight group.
-      ["foo.bar"] = "Identifier",
-    },
     -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
     -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
     -- Using this option may slow down your editor, and you may see some duplicate highlights.
     -- Instead of true it can also be a list of languages
-    additional_vim_regex_highlighting = false,
   },
   indent = { enable = true },
-  context_commentstring = { enable = true }
-}
-
-require'nvim-treesitter.configs'.setup {
   incremental_selection = {
     enable = true,
     keymaps = {
@@ -100,15 +98,12 @@ require'nvim-treesitter.configs'.setup {
       scope_incremental = "grc",
       node_decremental = "grm",
     },
-  },
-}
-
-require'nvim-treesitter.configs'.setup {
-  context_commentstring = {
-    enable = true
+    context_commentstring = { enable = true }
   }
 }
 
+cmd("omap <silent> m :<C-U>lua require('tsht').nodes()<CR>")
+cmd("xnoremap <silent> m :lua require('tsht').nodes()<CR>")
 ----  autocmd FileType help wincmd L
 
 -----------------------------------------------------------
@@ -121,7 +116,7 @@ opt.smartindent = true    -- autoindent new lines
 
 -- Status
 opt.laststatus = 3
-opt.winbar = "%=%m %f"
+-- opt.winbar = "%=%m %f"
 
 
 -- don't auto comment new lines
@@ -173,6 +168,7 @@ cmd [[
 -- Key map
 ----------
 
+map( "n", "<leader>h", ":lua require('tsht').nodes()<cr>", { noremap = true })
 -- or 'main'
 cmd [[
     let g:gitgutter_diff_base = ''

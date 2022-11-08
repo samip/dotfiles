@@ -1,3 +1,4 @@
+#!/bin/bash
 alias xcp="kitty +kitten clipboard"
 alias gdiff="git difftool --no-symlinks --dir-diff"
 alias img="kitty +kitten icat"
@@ -8,7 +9,7 @@ alias getclip="xclip -selection c -o"
 alias vs="cd /opt/vivaldi-snapshot/resources/vivaldi"
 alias :q="exit"
 alias x="xdg-open"
-alias dc='docker-compose --env-file .env.webpack'
+
 alias dragon="dragon 2>/dev/null"
 alias :v="(cd ~/.config/nvim/ && nvim init.lua lua/*)"
 alias :i="(cd ~/.config/regolith/i3/ && nvim config)"
@@ -22,7 +23,18 @@ alias dots="cd ~/Documents/dotfiles"
     #nvim $(git diff main.. --name-only | grep -e '\.vue$|\.js$')
 #}
 
-function goto() {
+goto() {
     shortcut_locations="$HOME/.config/shortcut-locations"
     test -f "$shortcut_locations" && cd "$(cat $shortcut_locations | fzf)"
 }
+
+dc()
+{
+    pushd ~/Documents/custobar/compose/
+    docker-compose --env-file .env.webpack "$1"
+    popd
+}
+
+alias wpl="pushd ~/Documents/custobar/compose/ && docker-compose --env-file .env.webpack logs -f webpack  && popd"
+alias dlog="pushd ~/Documents/custobar/compose/ && docker-compose --env-file .env.webpack logs -f django  && popd"
+alias co="cd ~/Documents/custobar/compose"

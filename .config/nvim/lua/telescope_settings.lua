@@ -11,7 +11,27 @@ require('telescope').setup{
   }
 }
 
+changed_on_branch = function()
+    local previewers = require('telescope.previewers')
+    local pickers = require('telescope.pickers')
+    local sorters = require('telescope.sorters')
+    local finders = require('telescope.finders')
+    -- local projectRoot = `git rev-parse --show-toplevel`
+
+    pickers.new {
+        results_title = 'Modified on current branch',
+        finder = finders.new_oneshot_job({'git-branch-modified.sh', 'list'}),
+        sorter = sorters.get_fuzzy_file(),
+        previewer = previewers.new_termopen_previewer {
+            get_command = function(entry)
+                return {'git-branch-modified.sh', 'diff', entry.value}
+            end
+        },
+    }:find()
+end
+
 --require('telescope.builtin').git_files()
+vim.api.nvim_set_keymap('n', '<leader>c', '<Cmd>lua changed_on_branch()<cr>', {})
 vim.api.nvim_set_keymap("n", "<leader>q", ":Telescope quickfix<cr>", {})
 vim.api.nvim_set_keymap("n", "<leader>f", ":Telescope find_files<cr>", {})
 --vim.api.nvim_set_keymap("n", "<leader>g", ":Telescope git_files<cr>", {})

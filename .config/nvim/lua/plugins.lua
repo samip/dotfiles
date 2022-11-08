@@ -24,12 +24,13 @@ return require('packer').startup(function()
   use 'tpope/vim-sensible'
   use 'tpope/vim-surround'
   use 'tpope/vim-vinegar' -- file browsing with -
+  use 'tpope/vim-repeat' -- file browsing with -
   use 'vim-airline/vim-airline'
-
+  use 'mfussenegger/nvim-treehopper'
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
   use 'nvim-treesitter/playground'
   use 'neovim/nvim-lspconfig'
-  use 'kabouzeid/nvim-lspinstall'
+  use 'williamboman/nvim-lsp-installer'
   use {
     'phaazon/hop.nvim',
     branch = 'v1', -- optional but strongly recommended
@@ -56,4 +57,5 @@ return require('packer').startup(function()
   use 'dense-analysis/ale'
   use 'windwp/nvim-ts-autotag'
   use 'norcalli/nvim-colorizer.lua'
+  use 'williamboman/mason.nvim'
 end)

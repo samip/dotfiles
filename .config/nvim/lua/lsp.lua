@@ -1,4 +1,5 @@
 local nvim_lsp = require('lspconfig')
+require("nvim-lsp-installer").setup {}
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -31,6 +32,50 @@ local on_attach = function(client, bufnr)
   --buf_set_keymap('n', '<space>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
   buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 end
+local configs = require'lspconfig/configs'
+local util = require 'lspconfig/util'
+configs.volar = {
+  default_config = {
+    filetypes = { 'vue' },
+    root_dir = util.root_pattern('package.json', 'vue.config.js'),
+    init_options = {
+        typescript = {
+            serverPath = '~/.nvm/versions/node/v16.15.0/bin/vue-language-server',
+        },
+        -- languageFeatures = {
+        --     references = true,
+        --     definition = true,
+        --     typeDefinition = true,
+        --     callHierarchy = true,
+        --     hover = true,
+        --     rename = true,
+        --     signatureHelp = true,
+        --     codeAction = true,
+        --     completion = {
+        --         defaultTagNameCase = 'both',
+        --         defaultAttrNameCase = 'kebabCase',
+        --         getDocumentNameCasesRequest = true,
+        --         getDocumentSelectionRequest = true,
+        --     },
+        --     documentLink = true,
+        --     codeLens = true,
+        --     diagnostics = true,
+        -- },
+        documentFeatures = {
+            selectionRange = true,
+            foldingRange = true,
+            documentSymbol = true,
+            documentColor = true,
+            documentFormatting = {
+                defaultPrintWidth = 100,
+                getDocumentPrintWidthRequest = true,
+            },
+        },
+    },
+  },
+}
+
+
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
@@ -44,4 +89,28 @@ for _, lsp in ipairs(servers) do
   }
 end
 
+vim.lsp.handlers["textDocument/publishDiagnostics"] =
+  vim.lsp.with(
+  vim.lsp.diagnostic.on_publish_diagnostics,
+  {
+    underline = false
+  }
+)
 
+require('lspconfig')['vetur'].setup{
+    on_attach = on_attach,
+}
+
+-- diagnostics
+vim.lsp.handlers["textDocument/publishDiagnostics"] =
+    vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+        -- Disable underline, it's very annoying
+        underline = false,
+        virtual_text = false,
+        -- Enable virtual text, override spacing to 4
+        -- virtual_text = {spacing = 4},
+        -- Use a function to dynamically turn signs off
+        -- and on, using buffer local variables
+        signs = true,
+        update_in_insert = false
+    })
