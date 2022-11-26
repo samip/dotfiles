@@ -6,6 +6,33 @@ local g = vim.g         				-- global variables
 local opt = vim.opt         		-- global/buffer/windows-scoped optionsocal g = vim.g
 -- cmd("set nocompatible")
 
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+-- set termguicolors to enable highlight groups
+vim.opt.termguicolors = true
+
+-- empty setup using defaults
+require("nvim-tree").setup()
+
+-- OR setup with some options
+require("nvim-tree").setup({
+  sort_by = "case_sensitive",
+  view = {
+    adaptive_size = true,
+    mappings = {
+      list = {
+        { key = "u", action = "dir_up" },
+      },
+    },
+  },
+  renderer = {
+    group_empty = true,
+  },
+  filters = {
+    dotfiles = true,
+  },
+})
 
 --
 -- npm install -g tree-sitter neovim
@@ -116,7 +143,7 @@ opt.smartindent = true    -- autoindent new lines
 
 -- Status
 opt.laststatus = 3
--- opt.winbar = "%=%m %f"
+opt.winbar = "%=%m %f"
 
 
 -- don't auto comment new lines
@@ -168,7 +195,7 @@ cmd [[
 -- Key map
 ----------
 
-map( "n", "<leader>h", ":lua require('tsht').nodes()<cr>", { noremap = true })
+map( "n", "<leader>l", ":lua require('tsht').nodes()<CR>", { noremap = true })
 -- or 'main'
 cmd [[
     let g:gitgutter_diff_base = ''

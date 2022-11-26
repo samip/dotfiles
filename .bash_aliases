@@ -31,7 +31,7 @@ goto() {
 dc()
 {
     pushd ~/Documents/custobar/compose/
-    docker-compose --env-file .env.webpack "$1"
+    docker-compose "$1"
     popd
 }
 

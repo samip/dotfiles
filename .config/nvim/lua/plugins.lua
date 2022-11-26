@@ -57,5 +57,11 @@ return require('packer').startup(function()
   use 'dense-analysis/ale'
   use 'windwp/nvim-ts-autotag'
   use 'norcalli/nvim-colorizer.lua'
-  use 'williamboman/mason.nvim'
+  use {
+    'nvim-tree/nvim-tree.lua',
+    requires = {
+      'nvim-tree/nvim-web-devicons', -- optional, for file icons
+    },
+    tag = 'nightly' -- optional, updated every week. (see issue #1193)
+  } use 'williamboman/mason.nvim'
 end)
