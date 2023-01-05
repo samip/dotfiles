@@ -1,4 +1,5 @@
 local map = vim.api.nvim_set_keymap  -- set global keymap
+
 local cmd = vim.cmd     				-- execute Vim commands
 local exec = vim.api.nvim_exec 	-- execute Vimscript
 local fn = vim.fn       				-- call Vim functions
@@ -12,27 +13,118 @@ vim.g.loaded_netrwPlugin = 1
 -- set termguicolors to enable highlight groups
 vim.opt.termguicolors = true
 
--- empty setup using defaults
-require("nvim-tree").setup()
+local actions = require'lir.actions'
+local mark_actions = require 'lir.mark.actions'
+local clipboard_actions = require'lir.clipboard.actions'
 
--- OR setup with some options
-require("nvim-tree").setup({
-  sort_by = "case_sensitive",
-  view = {
-    adaptive_size = true,
-    mappings = {
-      list = {
-        { key = "u", action = "dir_up" },
-      },
+require'lir'.setup {
+  show_hidden_files = false,
+  ignore = {}, -- { ".DS_Store" "node_modules" } etc.
+  devicons_enable = true,
+  mappings = {
+    ['<CR>']     = actions.edit,
+    ['<C-s>'] = actions.split,
+    ['<C-v>'] = actions.vsplit,
+    ['<C-t>'] = actions.tabedit,
+
+    ['h']     = actions.up,
+    ['q']     = actions.quit,
+
+    ['K']     = actions.mkdir,
+    ['N']     = actions.newfile,
+    ['R']     = actions.rename,
+    ['@']     = actions.cd,
+    ['Y']     = actions.yank_path,
+    ['.']     = actions.toggle_show_hidden,
+    ['D']     = actions.delete,
+
+    ['J'] = function()
+      mark_actions.toggle_mark()
+      vim.cmd('normal! j')
+    end,
+    ['C'] = clipboard_actions.copy,
+    ['X'] = clipboard_actions.cut,
+    ['P'] = clipboard_actions.paste,
+  },
+  float = {
+    winblend = 0,
+    curdir_window = {
+      enable = false,
+      highlight_dirname = false
     },
+
+    -- -- You can define a function that returns a table to be passed as the third
+    -- -- argument of nvim_open_win().
+    -- win_opts = function()
+    --   local width = math.floor(vim.o.columns * 0.8)
+    --   local height = math.floor(vim.o.lines * 0.8)
+    --   return {
+    --     border = {
+    --       "+", "─", "+", "│", "+", "─", "+", "│",
+    --     },
+    --     width = width,
+    --     height = height,
+    --     row = 1,
+    --     col = math.floor((vim.o.columns - width) / 2),
+    --   }
+    -- end,
   },
-  renderer = {
-    group_empty = true,
-  },
-  filters = {
-    dotfiles = true,
-  },
-})
+  hide_cursor = true,
+  on_init = function()
+    -- use visual mode
+    vim.api.nvim_buf_set_keymap(
+      0,
+      "x",
+      "J",
+      ':<C-u>lua require"lir.mark.actions".toggle_mark("v")<CR>',
+      { noremap = true, silent = true }
+    )
+
+    -- echo cwd
+    vim.api.nvim_echo({ { vim.fn.expand("%:p"), "Normal" } }, false, {})
+  end,
+}
+-- empty setup using defaults
+-- require'shade'.setup({
+--   overlay_opacity = 75,
+--   opacity_step = 1,
+--   keys = {
+--     brightness_up    = '<C-Up>',
+--     brightness_down  = '<C-Down>',
+--     toggle           = '<Leader>s',
+--   }
+-- })
+-- OR setup with some options
+
+-- require("nvim-tree").setup({
+--   sort_by = "case_sensitive",
+--   view = {
+--     adaptive_size = false,
+--     mappings = {
+--       list = {
+--         { key = "u", action = "dir_up" },
+--       },
+--     },
+--   },
+--   renderer = {
+--     group_empty = true,
+--   },
+--   filters = {
+--     dotfiles = true,
+--   },
+--   view = {
+--     float = {
+--       enable = false,
+--     }
+--   },
+--   actions = {
+--     open_file = {
+--       window_picker = {
+--         enable = false,
+--       }
+--     }
+--   }
+-- })
 
 --
 -- npm install -g tree-sitter neovim
@@ -47,13 +139,25 @@ require('plugins')
 require('lsp')
 require('telescope_settings')
 
-vim.lsp.handlers["textDocument/publishDiagnostics"] =
-  vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics,
-  {
-    underline = false
-  }
-)
+require"gitlinker".setup({
+  opts = {
+    -- action_callback = require"gitlinker.actions".open_in_browser,
+    print_url = true,
+  },
+  callbacks = {
+    ["gitlab.custobar.com"] = require"gitlinker.hosts".get_gitlab_type_url,
+  },
+-- default mapping to call url generation with action_callback
+  mappings = "<leader>gy"
+})
+-- show errors on line
+-- vim.lsp.handlers["textDocument/publishDiagnostics"] =
+--   vim.lsp.with(
+--   vim.lsp.diagnostic.on_publish_diagnostics,
+--   {
+--     underline = false
+--   }
+-- )
 require("mason").setup()
 -- the loading is important
 -- To get fzf loaded and working with telescope, you need to call
@@ -63,7 +167,6 @@ vim.g.coq_settings = {
   auto_start = 'shut-up',
   keymap = { jump_to_mark = '<C-your_key>' }
 }
---require'lspconfig'.tsserver.setup{ root_dir = vim.loop.cwd }
 
 --
 
@@ -117,8 +220,9 @@ require'nvim-treesitter.configs'.setup {
     -- Instead of true it can also be a list of languages
   },
   indent = { enable = true },
+  autotag = { enable = false },
   incremental_selection = {
-    enable = true,
+    enable = false,
     keymaps = {
       init_selection = "gnn",
       node_incremental = "grn",
@@ -234,11 +338,11 @@ map( "n", "Ö", ":GitGutterPrevHunk<CR>", { noremap = true})
 
 
 -- hop
--- vim.api.nvim_set_keymap('n', 'f', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>", {})
+vim.api.nvim_set_keymap('n', 'f', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>", {})
+
 -- vim.api.nvim_set_keymap('n', 'F', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>", {})
 -- vim.api.nvim_set_keymap('o', 'f', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true, inclusive_jump = true })<cr>", {})
 -- vim.api.nvim_set_keymap('o', 'F', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, inclusive_jump = true })<cr>", {})
--- vim.api.nvim_set_keymap('', 't', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>", {})
 -- vim.api.nvim_set_keymap('', 'T', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>", {})
 --vim.api.nvim_set_keymap('n', 'K', "<cmd> lua require'hop'.hint_lines({})<cr>", {})
 --vim.api.nvim_set_keymap('n', 'J', "<cmd> lua require'hop'.hint_lines({})<cr>", {})

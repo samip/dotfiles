@@ -1,5 +1,4 @@
 local nvim_lsp = require('lspconfig')
-require("nvim-lsp-installer").setup {}
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -97,9 +96,6 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] =
   }
 )
 
-require('lspconfig')['vetur'].setup{
-    on_attach = on_attach,
-}
 
 -- diagnostics
 vim.lsp.handlers["textDocument/publishDiagnostics"] =

@@ -5,6 +5,7 @@ setxkbmap -option caps:escape
 setxkbmap -option "nbsp:none"
 
 # ctrl+u to move up
+bind '"\C-u"':"\"cd ..\C-m\""
 
 # If not running interactively, don't do anything
 case $- in

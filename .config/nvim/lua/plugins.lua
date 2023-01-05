@@ -29,8 +29,6 @@ return require('packer').startup(function()
   use 'mfussenegger/nvim-treehopper'
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
   use 'nvim-treesitter/playground'
-  use 'neovim/nvim-lspconfig'
-  use 'williamboman/nvim-lsp-installer'
   use {
     'phaazon/hop.nvim',
     branch = 'v1', -- optional but strongly recommended
@@ -46,6 +44,7 @@ return require('packer').startup(function()
       {'nvim-telescope/telescope-fzf-native.nvim', run="make"},
     }
   }
+  use 'neovim/nvim-lspconfig'
   use 'ms-jpq/coq_nvim'
   --use { 'ms-jpq/coq.artifacts', branch = 'artifacts' }
   --use 'psliwka/vim-smoothie'
@@ -57,11 +56,14 @@ return require('packer').startup(function()
   use 'dense-analysis/ale'
   use 'windwp/nvim-ts-autotag'
   use 'norcalli/nvim-colorizer.lua'
+  use 'williamboman/mason.nvim'
   use {
-    'nvim-tree/nvim-tree.lua',
-    requires = {
-      'nvim-tree/nvim-web-devicons', -- optional, for file icons
-    },
-    tag = 'nightly' -- optional, updated every week. (see issue #1193)
-  } use 'williamboman/mason.nvim'
+    'ruifm/gitlinker.nvim',
+    requires = 'nvim-lua/plenary.nvim',
+  }
+  use 'mfussenegger/nvim-dap'
+  use 'sunjon/shade.nvim'
+  use 'drybalka/tree-climber.nvim'
+  use 'tamago324/lir.nvim'
+  use 'kyazdani42/nvim-web-devicons'
 end)

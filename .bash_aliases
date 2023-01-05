@@ -15,7 +15,6 @@ alias :v="(cd ~/.config/nvim/ && nvim init.lua lua/*)"
 alias :i="(cd ~/.config/regolith/i3/ && nvim config)"
 alias upd="sudo apt update && sudo apt upgrade"
 alias ll="lsd -la"
-alias ls="lsd"
 alias lt="lsd -a --tree"
 alias dots="cd ~/Documents/dotfiles"
 
@@ -28,13 +27,24 @@ goto() {
     test -f "$shortcut_locations" && cd "$(cat $shortcut_locations | fzf)"
 }
 
-dc()
+rebasei()
 {
-    pushd ~/Documents/custobar/compose/
-    docker-compose "$1"
-    popd
+    commits=$(git rev-list main.. --count)
+    git rebase -i HEAD~$commits
 }
 
+# dc() {
+#     pushd ~/Documents/custobar/compose/
+#     docker-compose "$1"
+#     popd
+# }
+
+fco() {
+    branch="$(git branch -l | fzf)"
+    git checkout $branch
+}
+alias dc="docker-compose -f ~/Documents/custobar/compose/docker-compose.yml"
+alias e="$EDITOR"
 alias wpl="pushd ~/Documents/custobar/compose/ && docker-compose --env-file .env.webpack logs -f webpack  && popd"
 alias dlog="pushd ~/Documents/custobar/compose/ && docker-compose --env-file .env.webpack logs -f django  && popd"
 alias co="cd ~/Documents/custobar/compose"
