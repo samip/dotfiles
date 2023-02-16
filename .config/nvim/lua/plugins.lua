@@ -9,7 +9,7 @@ return require('packer').startup(function()
   use 'PotatoesMaster/i3-vim-syntax'
   use 'christoomey/vim-tmux-navigator'
   use 'jeffkreeftmeijer/vim-numbertoggle' -- rel/norm linenumbers
-  use 'junegunn/vim-peekaboo'
+  -- use 'junegunn/vim-peekaboo'
   use 'kassio/neoterm'
   -- use 'leafgarland/typescript-vim'
   -- use 'majutsushi/tagbar'

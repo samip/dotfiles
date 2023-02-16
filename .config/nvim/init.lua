@@ -20,7 +20,9 @@ local clipboard_actions = require'lir.clipboard.actions'
 require'lir'.setup {
   show_hidden_files = false,
   ignore = {}, -- { ".DS_Store" "node_modules" } etc.
-  devicons_enable = true,
+  devicons = {
+    enable = true
+  },
   mappings = {
     ['<CR>']     = actions.edit,
     ['<C-s>'] = actions.split,
@@ -258,7 +260,7 @@ cmd [[autocmd FileType text,markdown,html,xhtml,javascript setlocal cc=0]]
 
 -- 2 spaces for selected filetypes
 cmd [[
-  autocmd FileType xml,html,xhtml,css,scss,javascript,lua,yaml setlocal shiftwidth=2 tabstop=2
+  autocmd FileType xml,html,xhtml,css,scss,lua,yaml setlocal shiftwidth=2 tabstop=2
 ]]
 
 cmd [[augroup _git
