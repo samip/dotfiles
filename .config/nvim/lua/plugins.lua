@@ -66,4 +66,6 @@ return require('packer').startup(function()
   use 'drybalka/tree-climber.nvim'
   use 'tamago324/lir.nvim'
   use 'kyazdani42/nvim-web-devicons'
+  use 'tpope/vim-abolish'
+  use 'phelipetls/jsonpath.nvim'
 end)

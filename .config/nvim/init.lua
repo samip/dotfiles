@@ -224,15 +224,16 @@ require'nvim-treesitter.configs'.setup {
   indent = { enable = true },
   autotag = { enable = false },
   incremental_selection = {
-    enable = false,
+    enable = true,
     keymaps = {
-      init_selection = "gnn",
-      node_incremental = "grn",
-      scope_incremental = "grc",
-      node_decremental = "grm",
-    },
+      init_selection = '<CR>',
+      scope_decremental = '<S-CR>',
+      scope_incremental = '<CR>',
+      node_incremental = '<TAB>',
+      node_decremental = '<S-TAB>',
+    }
+  },
     context_commentstring = { enable = true }
-  }
 }
 
 cmd("omap <silent> m :<C-U>lua require('tsht').nodes()<CR>")
@@ -249,7 +250,14 @@ opt.smartindent = true    -- autoindent new lines
 
 -- Status
 opt.laststatus = 3
+
 opt.winbar = "%=%m %f"
+
+-- show json path in the winbar
+if vim.fn.exists("+winbar") == 1 then
+  opt.winbar = "%{%v:lua.require'jsonpath'.get()%} %=%m %f "
+end
+
 
 
 -- don't auto comment new lines
@@ -340,7 +348,7 @@ map( "n", "Ö", ":GitGutterPrevHunk<CR>", { noremap = true})
 
 
 -- hop
-vim.api.nvim_set_keymap('n', 'f', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>", {})
+-- vim.api.nvim_set_keymap('n', 'f', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>", {})
 
 -- vim.api.nvim_set_keymap('n', 'F', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>", {})
 -- vim.api.nvim_set_keymap('o', 'f', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true, inclusive_jump = true })<cr>", {})
