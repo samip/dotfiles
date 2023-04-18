@@ -8,7 +8,12 @@ require('telescope').setup{
       case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
                                        -- the default case_mode is "smart_case"
     }
-  }
+  },
+  pickers = {
+    find_files = {
+      find_command = { "fd", "--type", "f", "--strip-cwd-prefix" },
+    },
+  },
 }
 
 changed_on_branch = function()
@@ -33,6 +38,7 @@ end
 --require('telescope.builtin').git_files()
 vim.api.nvim_set_keymap('n', '<leader>c', '<Cmd>lua changed_on_branch()<cr>', {})
 vim.api.nvim_set_keymap("n", "<leader>q", ":Telescope quickfix<cr>", {})
+vim.api.nvim_set_keymap("n", "<leader>f", ":Telescope find_files<cr>", {})
 vim.api.nvim_set_keymap("n", "<leader>f", ":Telescope find_files<cr>", {})
 --vim.api.nvim_set_keymap("n", "<leader>g", ":Telescope git_files<cr>", {})
 --vim.api.nvim_set_keymap('n', '<Leader>g',  [[<Cmd>lua require('telescope.builtin').git_files()<CR>]], { noremap = true, silent = true })
