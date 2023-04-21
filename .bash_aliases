@@ -1,4 +1,5 @@
 #!/bin/bash
+alias so="source"
 alias xcp="kitty +kitten clipboard"
 alias gdiff="git difftool --no-symlinks --dir-diff"
 alias img="kitty +kitten icat"
