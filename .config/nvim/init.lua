@@ -346,6 +346,8 @@ map( "n", "Ä", ":vertical resize -5<CR>", { noremap = true })
 map( "n", "ö", ":GitGutterNextHunk<CR>", { noremap = true})
 map( "n", "Ö", ":GitGutterPrevHunk<CR>", { noremap = true})
 
+map('n', '<space>v', ':vsplit | lua vim.lsp.buf.definition()<CR>', { noremap = true})
+map('n', '<space>s', ':belowright split | lua vim.lsp.buf.definition()<CR>', { noremap = true})
 
 -- hop
 -- vim.api.nvim_set_keymap('n', 'f', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>", {})

@@ -19,6 +19,8 @@ alias ll="lsd -la"
 alias lt="lsd -a --tree"
 alias dots="cd ~/Documents/dotfiles"
 
+alias cd="z"
+
 #oc() {
     #nvim $(git diff main.. --name-only | grep -e '\.vue$|\.js$')
 #}
@@ -44,7 +46,7 @@ fco() {
     branch="$(git branch -l | fzf)"
     git checkout $branch
 }
-alias dc="docker-compose -f ~/Documents/custobar/compose/docker-compose.yml"
+alias dc="docker compose"
 alias e="$EDITOR"
 alias wpl="pushd ~/Documents/custobar/compose/ && docker-compose --env-file .env.webpack logs -f webpack  && popd"
 alias dlog="pushd ~/Documents/custobar/compose/ && docker-compose --env-file .env.webpack logs -f django  && popd"
