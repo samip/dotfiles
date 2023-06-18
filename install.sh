@@ -2,7 +2,9 @@
 
 add-apt-repository ppa:neovim-ppa/unstable
 apt-get update
-apt-get install -y tmux stew tig neovim xclip bat git fzf zsh
+apt-get install -y tmux stew tig neovim xclip bat git fzf zsh fd-find
+
+ln -s $(which fdfind) ~/.local/bin/fd
 
 # https://github.com/mwh/dragon
 git clone https://github.com/jeffreytse/zsh-vi-mode \

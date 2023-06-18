@@ -1,6 +1,8 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
+export OPENAI_API_KEY=$(cat ~/.openai_key)
+
 setxkbmap -option caps:escape
 setxkbmap -option "nbsp:none"
 
