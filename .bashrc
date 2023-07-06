@@ -4,7 +4,7 @@
 export OPENAI_API_KEY=$(cat ~/.openai_key)
 
 # https://github.com/ajeetdsouza/zoxide
-# eval "$(zoxide init bash)"
+eval "$(zoxide init bash)"
 
 setxkbmap -option caps:escape
 setxkbmap -option "nbsp:none"
