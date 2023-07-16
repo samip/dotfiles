@@ -308,7 +308,7 @@ cmd [[
 -----------
 -- Key map
 ----------
-
+map( "n", "gp", "`[v`]", { noremap = true })
 map( "n", "<leader>l", ":lua require('tsht').nodes()<CR>", { noremap = true })
 -- or 'main'
 cmd [[
