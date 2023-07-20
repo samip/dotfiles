@@ -30,3 +30,5 @@ cat "$PWD/init/.bash_history" >> ~/.bash_history
 cat "$PWD/init/.config/shortcut-locations" >> ~/.config/shortcut-locations
 
 tmux source-file ~/.tmux.conf
+
+wget https://github.com/erebe/greenclip/releases/download/v4.2/greenclip && mv greenclip ~/.local/bin
