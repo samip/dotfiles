@@ -3,6 +3,9 @@
 # for examples
 export OPENAI_API_KEY=$(cat ~/.openai_key)
 
+export EVENTLET_HUB=poll # (might be only necessary on macOS)
+export FLASK_CONFIGURATION=development
+export FLASK_RUN_PORT=8090
 # https://github.com/ajeetdsouza/zoxide
 eval "$(zoxide init bash)"
 
