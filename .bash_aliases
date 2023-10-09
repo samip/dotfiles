@@ -36,6 +36,12 @@ rebasei()
     git rebase -i HEAD~$commits
 }
 
+activ()
+{
+    folder=$(pwd)
+    ln -sfn "$folder" ~/Documents/custobar/custobar
+}
+
 # dc() {
 #     pushd ~/Documents/custobar/compose/
 #     docker-compose "$1"
@@ -51,3 +57,8 @@ alias e="$EDITOR"
 alias wpl="pushd ~/Documents/custobar/compose/ && docker-compose --env-file .env.webpack logs -f webpack  && popd"
 alias dlog="pushd ~/Documents/custobar/compose/ && docker-compose --env-file .env.webpack logs -f django  && popd"
 alias co="cd ~/Documents/custobar/compose"
+
+alias m="docker compose exec django python manage.py"
+alias b="docker compose exec django bash"
+alias code="tmux a -t code"
+alias comp="tmux a -t compose"
