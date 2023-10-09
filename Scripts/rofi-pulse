@@ -3,7 +3,7 @@
 selection=$(
 	pactl list short sinks |
 	sed "s/RUNNING/a/g; s/IDLE/b/g; s/SUSPENDED/c/g; s/alsa_output.//g" |
-    grep -v 0000 |
+    grep -v analog |
 	sort -k7 |
 	awk '{print $2}')
 

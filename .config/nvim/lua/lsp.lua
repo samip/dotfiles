@@ -34,46 +34,6 @@ end
 
 local configs = require'lspconfig/configs'
 local util = require 'lspconfig/util'
-configs.volar = {
-  default_config = {
-    filetypes = { 'vue' },
-    root_dir = util.root_pattern('package.json', 'vue.config.js'),
-    init_options = {
-        typescript = {
-            serverPath = '~/.nvm/versions/node/v16.15.0/bin/vue-language-server',
-        },
-        -- languageFeatures = {
-        --     references = true,
-        --     definition = true,
-        --     typeDefinition = true,
-        --     callHierarchy = true,
-        --     hover = true,
-        --     rename = true,
-        --     signatureHelp = true,
-        --     codeAction = true,
-        --     completion = {
-        --         defaultTagNameCase = 'both',
-        --         defaultAttrNameCase = 'kebabCase',
-        --         getDocumentNameCasesRequest = true,
-        --         getDocumentSelectionRequest = true,
-        --     },
-        --     documentLink = true,
-        --     codeLens = true,
-        --     diagnostics = true,
-        -- },
-        documentFeatures = {
-            selectionRange = true,
-            foldingRange = true,
-            documentSymbol = true,
-            documentColor = true,
-            documentFormatting = {
-                defaultPrintWidth = 100,
-                getDocumentPrintWidthRequest = true,
-            },
-        },
-    },
-  },
-}
 
 
 
@@ -89,6 +49,46 @@ for _, lsp in ipairs(servers) do
   }
 end
 
+nvim_lsp.vuels.setup {
+	on_attach = function(client)
+			--[[
+		Internal Vetur formatting is not supported out of the box
+
+		This line below is required if you:
+				- want to format using Nvim's native `vim.lsp.buf.formatting**()`
+				- want to use Vetur's formatting config instead, e.g, settings.vetur.format {...}
+			--]]
+			client.resolved_capabilities.document_formatting = true
+			on_attach(client)
+	end,
+	capabilities = capabilities,
+	settings = {
+			vetur = {
+		completion = {
+				autoImport = true,
+				useScaffoldSnippets = true
+		},
+		format = {
+				defaultFormatter = {
+			html = "none",
+			js = "prettier",
+			ts = "prettier",
+				}
+		},
+		validation = {
+				template = true,
+				script = true,
+				style = true,
+				templateProps = true,
+				interpolation = true
+		},
+		experimental = {
+				templateInterpolationService = true
+		}
+			}
+	},
+	root_dir = util.root_pattern("header.php", "package.json", "style.css", 'webpack.config.js')
+}
 vim.lsp.handlers["textDocument/publishDiagnostics"] =
   vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics,
