@@ -2,7 +2,7 @@
 
 add-apt-repository ppa:neovim-ppa/unstable
 apt-get update
-apt-get install -y tmux stew tig neovim xclip bat git fzf zsh fd-find
+apt-get install -y tmux stow tig neovim xclip bat git fzf zsh fd-find
 
 ln -s $(which fdfind) ~/.local/bin/fd
 
@@ -18,7 +18,8 @@ git config --global alias.last 'log -1 HEAD'
 git config --global alias.ll log --oneline
 git config --global alias.d diff
 git config --global core.editor nvim
-
+git clone --depth 1 https://github.com/wbthomason/packer.nvim\
+ ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 if ! command -v lsd > /dev/null
 then
     lsd_deb_name="lsd_0.21.0_amd64.deb"
