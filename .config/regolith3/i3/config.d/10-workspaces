@@ -1,0 +1,16 @@
+set $monitor_left "DisplayPort-2"
+set $monitor_right "DisplayPort-1"
+set $tv "HDMI-1"
+
+workspace 0 output $tv
+
+workspace 1 output $monitor_left
+workspace 3 output $monitor_left
+workspace 5 output $monitor_left
+workspace 7 output $monitor_left
+workspace 9 output $monitor_left
+
+workspace 2 output $monitor_right
+workspace 4 output $monitor_right
+workspace 6 output $monitor_right
+workspace 8 output $monitor_right

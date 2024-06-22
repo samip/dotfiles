@@ -1,0 +1,3 @@
+[output]
+command=/home/smaipe/.config/regolith3/i3xrocks/conf.d/pulseaudio-sink.sh
+interval=1

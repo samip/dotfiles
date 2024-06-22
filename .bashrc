@@ -149,7 +149,7 @@ eval "$(starship init bash)"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-nvm use 16.15.0 > /dev/null
+nvm use 18.17.0 > /dev/null
 export GIT_EDITOR=nvim
 # =============================================================================
 #
@@ -280,3 +280,7 @@ fi
 # eval "$(zoxide init bash)"
 
 screen -S greenclip -X select . > /dev/null || screen -dmS greenclip greenclip daemon
+
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
