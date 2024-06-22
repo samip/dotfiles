@@ -39,7 +39,7 @@ local util = require 'lspconfig/util'
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'tsserver', 'solargraph', 'bashls', 'vuels', 'pyright', 'lua_ls', 'clangd' }
+local servers = { 'tsserver', 'solargraph', 'bashls', 'vuels', 'pyright', 'lua_ls', 'clangd', 'tailwindcss' }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,

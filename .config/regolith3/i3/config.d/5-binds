@@ -1,0 +1,21 @@
+bindcode $mod+Shift+49 move to scratchpad
+bindcode $mod+49 scratchpad show
+
+bindsym $mod+Shift+ä exec "ssh pi@192.168.100.35 tv_on"
+bindsym $mod+Shift+å exec "ssh pi@192.168.100.35 tv_off"
+
+bindsym $alt+v exec "~/Scripts/greenclip"
+bindsym $mod+Esc exec "~/Scripts/chrome-reload"
+bindsym $mod+F11 exec "python ~/Scripts/plug.py"
+bindsym $mod+F12 exec "~/Scripts/pulse-toggle"
+
+bindsym $alt+c exec gnome-calendar
+# bindsym $alt+p exec "kitty --title float -e python"
+bindsym $alt+p exec "kitty  -e python"
+bindsym $alt+w exec "kitty -e 'source /home/smaipe/.bash_aliases && work'"
+bindsym $alt+s exec spotify
+bindsym $alt+t exec /opt/telegram/Telegram
+
+bindsym $alt+m exec "/opt/myrmidon/myrmidon.sh ~/.config/myrmidon/browser.json"
+
+bindsym Print exec gnome-screenshot -i

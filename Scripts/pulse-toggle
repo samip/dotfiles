@@ -1,0 +1,27 @@
+#!/bin/sh
+
+# Define your two sinks here
+sink1="alsa_output.usb-FiiO_DigiHug_USB_Audio-01.analog-stereo"
+sink2="alsa_output.usb-041e_Creative_Bluetooth_Audio_W2_00857B54003C0002-00.analog-stereo"
+
+# Get the current default sink
+current_sink=$(pactl info | grep "Default Sink" | awk '{print $3}')
+
+# Determine the new sink
+if [ "$current_sink" = "$sink1" ]; then
+    new_sink="$sink2"
+else
+    new_sink="$sink1"
+fi
+
+# Set the new default sink
+pactl set-default-sink "$new_sink"
+
+# Move each audio stream to the new sink
+pactl list short sink-inputs | while read -r stream; do
+    streamId=$(echo "$stream" | awk '{print $1}')
+    pactl move-sink-input "$streamId" "$new_sink"
+done
+
+# Print the new default sink for confirmation
+echo "Switched to sink: $new_sink"

@@ -1,0 +1,34 @@
+wm.mod: Mod1
+wm.alt: Mod4
+wm.bar.position: top
+/* i3xrocks.label.color: #fef */
+i3xrocks.value.color: #FFFFFF
+wm.bar.workspace.inactive.text.color: #FFFFFF
+!i3xrocks.value.font: Source Code Pro Medium 25
+
+!regolith.look.path: /usr/share/regolith-look/gruvbox
+!regolith.look.path: /usr/share/regolith-look/nevil
+!regolith.look.path: /usr/share/regolith-look/blackhole
+!regolith.look.path: /usr/share/regolith-look/nord
+!regolith.look.path: /usr/share/regolith-look/gruvbox
+!regolith.look.path: /usr/share/regolith-look/nevil
+!regolith.look.path: /usr/share/regolith-look/gruvbox
+!regolith.look.path: /usr/share/regolith-look/solarized-dark
+!regolith.look.path: /usr/share/regolith-look/default
+!regolith.look.path: /usr/share/regolith-look/nevil
+regolith.look.path: /usr/share/regolith-look/gruvbox
+regolith.wallpaper.file: ~/Pictures/wallpaper.jpg
+regolith.wallpaper.options: stretched
+
+wm.client.focused.color.border: color_base03
+wm.client.focused.color.background: color_base01
+wm.client.focused.color.text: color_base3
+wm.client.focused.color.indicator: color_blue
+wm.client.focused.color.child_border: color_base01
+
+! default conflicts with alt+d in Vivaldi (focus address bar)
+wm.binding.display: m
+
+wm.gaps.inner.size: 13
+wm.binding.reboot: ö
+wm.binding.lock: ä

@@ -197,7 +197,6 @@ opt.smartcase = true          -- case-sensitive search if search term contains u
 opt.smartindent = true
 opt.list = true               -- show whitespace
 
-
 cmd [[au Filetype lua setl omnifunc=v:lua.vim.lsp.omnifunc ]]
 -- remove whitespace on save
 cmd [[au BufWritePre * :%s/\s\+$//e]]
