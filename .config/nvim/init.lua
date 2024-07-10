@@ -1,3 +1,4 @@
+require('lsp')
 local map = vim.api.nvim_set_keymap  -- set global keymap
 
 local cmd = vim.cmd     				-- execute Vim commands
@@ -138,7 +139,6 @@ g.mapleader = ','
 g.maplocalleader = ','
 -- ~/.config/nvim/lua/plugins.lua
 require('plugins')
-require('lsp')
 require('telescope_settings')
 
 require"gitlinker".setup({
@@ -209,7 +209,7 @@ exec([[
   augroup end
 ]], false)
 
-require('telescope').load_extension('fzf')
+-- require('telescope').load_extension('fzf')
 
 require'nvim-treesitter.configs'.setup {
   highlight = {
@@ -225,15 +225,18 @@ require'nvim-treesitter.configs'.setup {
   incremental_selection = {
     enable = true,
     keymaps = {
-      init_selection = '<CR>',
-      scope_decremental = '<S-CR>',
-      scope_incremental = '<CR>',
-      node_incremental = '<TAB>',
-      node_decremental = '<S-TAB>',
+      -- init_selection = '<CR>',
+      -- scope_decremental = '<S-CR>',
+      -- scope_incremental = '<CR>',
+      -- node_incremental = '<TAB>',
+      -- node_decremental = '<S-TAB>',
     }
   },
-    context_commentstring = { enable = true }
+    -- context_commentstring = { enable = true }
 }
+
+require('ts_context_commentstring').setup {}
+vim.g.skip_ts_context_commentstring_module = true
 
 cmd("omap <silent> m :<C-U>lua require('tsht').nodes()<CR>")
 cmd("xnoremap <silent> m :lua require('tsht').nodes()<CR>")
