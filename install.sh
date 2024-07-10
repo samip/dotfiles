@@ -2,16 +2,17 @@
 
 add-apt-repository ppa:neovim-ppa/unstable
 apt-get update
-apt-get install -y tmux stew tig neovim xclip bat git fzf zsh fd-find ripgrep
+apt-get install -y tmux stew tig neovim xclip bat git fd-find ripgrep
 
 ln -s $(which fdfind) ~/.local/bin/fd
 
 # https://github.com/mwh/dragon
-git clone https://github.com/jeffreytse/zsh-vi-mode \
-  $ZSH_CUSTOM/plugins/zsh-vi-mode
 
 curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install --all
 
 git config --global alias.st status
 git config --global alias.last 'log -1 HEAD'
