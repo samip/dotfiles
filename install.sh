@@ -35,6 +35,8 @@ curl -sS https://starship.rs/install.sh | sh
 cat "$PWD/init/.bash_history" >> ~/.bash_history
 cat "$PWD/init/.config/shortcut-locations" >> ~/.config/shortcut-locations
 
+if "test ! -d ~/.tmux/plugins/tpm" \
+   "run 'git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm && ~/.tmux/plugins/tpm/bin/install_plugins'"
 tmux source-file ~/.tmux.conf
 
 wget https://github.com/erebe/greenclip/releases/download/v4.2/greenclip && mv greenclip ~/.local/bin
