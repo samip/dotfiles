@@ -40,3 +40,4 @@ wget https://github.com/erebe/greenclip/releases/download/v4.2/greenclip && mv g
 sudo apt install zoxide x11-xkb-utils x11-server-utils
 sudo apt install x11-xserver-utils
 sudo apt install python3.10-venv
+sudo apt install tig
