@@ -17,8 +17,7 @@ alias :i="(cd ~/.config/regolith/i3/ && nvim config)"
 alias upd="sudo apt update && sudo apt upgrade"
 alias ll="lsd -la"
 alias lt="lsd -a --tree"
-alias dots="cd ~/dotfiles"
-
+alias dots='[ -d ~/dotfiles ] && cd ~/dotfiles || cd ~/Documents/dotfiles'
 alias cd="z"
 
 #oc() {
