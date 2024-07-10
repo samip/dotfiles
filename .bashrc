@@ -1,8 +1,7 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
-export OPENAI_API_KEY=$(cat ~/.openai_key)
-
+if [ -f ~/.openai_key ]; then export OPENAI_API_KEY=$(cat ~/.openai_key); fi
 export EVENTLET_HUB=poll # (might be only necessary on macOS)
 export FLASK_CONFIGURATION=development
 export FLASK_RUN_PORT=8090
