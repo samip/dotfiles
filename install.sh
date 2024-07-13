@@ -22,6 +22,7 @@ git config --global alias.d diff
 git config --global core.editor nvim
 git config --global user.email "sami@pell.fi"
 git config --global user.name "Sami Pellinen":w
+git config --global init.defaultBranch master
 
 
 if ! command -v lsd > /dev/null
@@ -32,6 +33,7 @@ then
 fi
 wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 curl -sS https://starship.rs/install.sh | sh
+curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
 
 cat "$PWD/init/.bash_history" >> ~/.bash_history
 cat "$PWD/init/.config/shortcut-locations" >> ~/.config/shortcut-locations
@@ -41,7 +43,7 @@ if "test ! -d ~/.tmux/plugins/tpm" \
 tmux source-file ~/.tmux.conf
 
 wget https://github.com/erebe/greenclip/releases/download/v4.2/greenclip && mv greenclip ~/.local/bin
-sudo apt install zoxide x11-xkb-utils x11-server-utils
+sudo apt install x11-xkb-utils x11-server-utils
 sudo apt install x11-xserver-utils
 sudo apt install python3.10-venv
 sudo apt install tig

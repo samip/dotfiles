@@ -10,7 +10,7 @@ alias getclip="xclip -selection c -o"
 alias vs="cd /opt/vivaldi-snapshot/resources/vivaldi"
 alias :q="exit"
 alias x="xdg-open"
-
+alias ff="ls | fzf --header 'Use CTRL-C to cancel' --reverse --preview='bat {}'"
 alias dragon="dragon 2>/dev/null"
 alias :v="(cd ~/.config/nvim/ && nvim init.lua lua/*)"
 alias :i="(cd ~/.config/regolith/i3/ && nvim config)"
