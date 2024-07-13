@@ -5,8 +5,6 @@ if [ -f ~/.openai_key ]; then export OPENAI_API_KEY=$(cat ~/.openai_key); fi
 export EVENTLET_HUB=poll # (might be only necessary on macOS)
 export FLASK_CONFIGURATION=development
 export FLASK_RUN_PORT=8090
-# https://github.com/ajeetdsouza/zoxide
-eval "$(zoxide init bash)"
 
 setxkbmap -option caps:escape
 setxkbmap -option "nbsp:none"
@@ -20,6 +18,10 @@ case $- in
       *) return;;
 esac
 export PATH="$PATH:$HOME/.local/bin:/opt/sonar-scanner/bin/:"
+
+# https://github.com/ajeetdsouza/zoxide
+eval "$(zoxide init bash)"
+
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth:erasedups
