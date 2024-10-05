@@ -59,5 +59,4 @@ alias co="cd ~/Documents/custobar/compose"
 
 alias m="docker compose exec django python manage.py"
 alias b="docker compose exec django bash"
-alias code="tmux a -t code"
-alias comp="tmux a -t compose"
+alias lastcmd="fc -ln -1"

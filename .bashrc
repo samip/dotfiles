@@ -150,7 +150,8 @@ eval "$(starship init bash)"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-nvm use 18.17.0 > /dev/null
+nvm use &> /dev/null # load version from .nvmrc
+# nvm use 18.17.0 > /dev/null
 export GIT_EDITOR=nvim
 # =============================================================================
 #
@@ -285,3 +286,17 @@ screen -S greenclip -X select . > /dev/null || screen -dmS greenclip greenclip d
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
+export ANDROID_HOME=/opt/android-sdk
+
+# Function to automatically load Node version from .node-version file
+load-nvmrc() {
+  if [ -f ".node-version" ]; then
+    local node_version=$(cat .node-version)
+    if [ "$node_version" != "$(nvm current)" ]; then
+      nvm use "$node_version"
+    fi
+  fi
+}
+
+# Run the load-nvmrc function every time the directory is changed
+export PROMPT_COMMAND="load-nvmrc; $PROMPT_COMMAND"

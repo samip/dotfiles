@@ -2,7 +2,7 @@
 
 add-apt-repository ppa:neovim-ppa/unstable
 apt-get update
-apt-get install -y tmux stew tig neovim xclip bat git fd-find ripgrep
+apt-get install -y tmux stew tig neovim xclip bat git fd-find ripgrep xclip
 sudo mv /usr/bin/batcat /usr/bin/bat
 sudo mv /usr/bin/fdfind /usr/bin/fd
 ln -s $(which fdfind) ~/.local/bin/fd
