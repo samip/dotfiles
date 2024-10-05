@@ -39,7 +39,8 @@ local util = require 'lspconfig/util'
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'tsserver', 'bashls', 'vuels', 'pyright', 'lua_ls', 'clangd' }
+local servers = { 'tsserver', 'bashls', 'pyright', 'lua_ls', 'clangd' }
+
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
@@ -88,6 +89,18 @@ nvim_lsp.vuels.setup {
 			}
 	},
 	root_dir = util.root_pattern("header.php", "package.json", "style.css", 'webpack.config.js')
+}
+
+nvim_lsp.gopls.setup {
+  settings = {
+    gopls = {
+      analyses = {
+        unusedparams = true,
+      },
+      staticcheck = true,
+      gofumpt = true,
+    },
+  },
 }
 vim.lsp.handlers["textDocument/publishDiagnostics"] =
   vim.lsp.with(
