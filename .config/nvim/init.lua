@@ -225,15 +225,19 @@ require'nvim-treesitter.configs'.setup {
   incremental_selection = {
     enable = true,
     keymaps = {
-      init_selection = '<CR>',
-      scope_decremental = '<S-CR>',
-      scope_incremental = '<CR>',
-      node_incremental = '<TAB>',
-      node_decremental = '<S-TAB>',
+      -- init_selection = '<CR>',
+      -- scope_decremental = '<S-CR>',
+      -- scope_incremental = '<CR>',
+      -- node_incremental = '<TAB>',
+      -- node_decremental = '<S-TAB>',
     }
   },
-    context_commentstring = { enable = true }
 }
+require('ts_context_commentstring').setup {
+
+}
+
+vim.g.skip_ts_context_commentstring_module = true
 
 cmd("omap <silent> m :<C-U>lua require('tsht').nodes()<CR>")
 cmd("xnoremap <silent> m :lua require('tsht').nodes()<CR>")

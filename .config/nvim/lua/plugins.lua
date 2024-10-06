@@ -68,4 +68,5 @@ return require('packer').startup(function()
   use 'kyazdani42/nvim-web-devicons'
   use 'tpope/vim-abolish'
   use 'phelipetls/jsonpath.nvim'
+  use 'jose-elias-alvarez/null-ls.nvim'
 end)

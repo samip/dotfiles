@@ -1,4 +1,4 @@
-# ~/.bashrc: executed by bash(1) for non-login shells.
+PROMPT_COMMAND='if [ -n "$TMUX" ]; then tmux_session="(tmux: $(tmux display-message -p "#S"))"; else tmux_session=""; fi; echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD} $tmux_session\007"'
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 export OPENAI_API_KEY=$(cat ~/.openai_key)
@@ -149,7 +149,7 @@ eval "$(starship init bash)"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-nvm use 18.17.0 > /dev/null
+nvm use 18.18.2 > /dev/null
 export GIT_EDITOR=nvim
 # =============================================================================
 #
