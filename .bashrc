@@ -296,6 +296,10 @@ load-nvmrc() {
       nvm use "$node_version"
     fi
   fi
+
+  if [ -f "venv/bin/activate" ]; then
+      source "venv/bin/activate"
+  fi
 }
 
 # Run the load-nvmrc function every time the directory is changed
