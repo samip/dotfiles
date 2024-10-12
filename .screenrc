@@ -1,0 +1,4 @@
+default-color green
+
+shell -bash
+escape ^Bb

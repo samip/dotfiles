@@ -51,6 +51,14 @@ fco() {
     branch="$(git branch -l | fzf)"
     git checkout $branch
 }
+
+
+exit_if_screen() {
+    if [[ "$TERM" == "screen" ]]; then
+        exit
+    fi
+}
+
 alias dc="docker compose"
 alias e="$EDITOR"
 alias wpl="pushd ~/Documents/custobar/compose/ && docker-compose --env-file .env.webpack logs -f webpack  && popd"
@@ -60,3 +68,4 @@ alias co="cd ~/Documents/custobar/compose"
 alias m="docker compose exec django python manage.py"
 alias b="docker compose exec django bash"
 alias lastcmd="fc -ln -1"
+alias td="tmux new-ses -s $(basename $(pwd))"
