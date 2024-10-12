@@ -304,3 +304,6 @@ load-nvmrc() {
 
 # Run the load-nvmrc function every time the directory is changed
 export PROMPT_COMMAND="load-nvmrc; $PROMPT_COMMAND"
+
+export ANDROID_HOME=/opt/android-sdk
+export PATH=$PATH:/opt/android-sdk/platform-tools
