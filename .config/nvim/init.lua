@@ -18,9 +18,157 @@ local actions = require'lir.actions'
 local mark_actions = require 'lir.mark.actions'
 local clipboard_actions = require'lir.clipboard.actions'
 
+--   panel = {
+--     enabled = true,
+--     auto_refresh = false,
+--     keymap = {
+--       jump_prev = "[[",
+--       jump_next = "]]",
+--       accept = "<CR>",
+--       refresh = "gr",
+--       open = "<M-CR>"
+--     },
+--     layout = {
+--       position = "bottom", -- | top | left | right
+--       ratio = 0.4
+--     },
+--   },
+--   suggestion = {
+--     enabled = true,
+--     auto_trigger = false,
+--     hide_during_completion = true,
+--     debounce = 75,
+--     keymap = {
+--       accept = "<M-l>",
+--       accept_word = false,
+--       accept_line = false,
+--       next = "<M-]>",
+--       prev = "<M-[>",
+--       dismiss = "<C-]>",
+--     },
+--   },
+--   filetypes = {
+--     yaml = false,
+--     markdown = false,
+--     help = false,
+--     gitcommit = false,
+--     gitrebase = false,
+--     hgcommit = false,
+--     svn = false,
+--     cvs = false,
+--     ["."] = false,
+--   },
+--   copilot_node_command = 'node', -- Node.js version must be > 18.x
+--   server_opts_overrides = {},
+-- })
+require("neotest").setup({
+  adapters = {
+    require("neotest-python")({
+        -- Extra arguments for nvim-dap configuration
+        -- See https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings for values
+        dap = { justMyCode = false },
+        -- Command line arguments for runner
+        -- Can also be a function to return dynamic values
+        args = {"--log-level", "DEBUG"},
+        -- Runner to use. Will use pytest if available by default.
+        -- Can be a function to return dynamic value.
+        runner = "pytest",
+        -- Custom python path for the runner.
+        -- Can be a string or a list of strings.
+        -- Can also be a function to return dynamic value.
+        -- If not provided, the path will be inferred by checking for
+        -- virtual envs in the local directory and for Pipenev/Poetry configs
+        python = ".venv/bin/python",
+        -- Returns if a given file path is a test file.
+        -- NB: This function is called a lot so don't perform any heavy tasks within it.
+        -- is_test_file = function(file_path)
+        --   ...
+        -- end,
+        -- !!EXPERIMENTAL!! Enable shelling out to `pytest` to discover test
+        -- instances for files containing a parametrize mark (default: false)
+        pytest_discover_instances = true
+    })
+  }
+})
+
+
+-- Set up nvim-cmp.
+local cmp = require'cmp'
+
+cmp.setup({
+  snippet = {
+    -- REQUIRED - you must specify a snippet engine
+    expand = function(args)
+      vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+      -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+      -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
+      -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+      -- vim.snippet.expand(args.body) -- For native neovim snippets (Neovim v0.10+)
+    end,
+  },
+  window = {
+    -- completion = cmp.config.window.bordered(),
+    -- documentation = cmp.config.window.bordered(),
+  },
+  mapping = cmp.mapping.preset.insert({
+    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-e>'] = cmp.mapping.abort(),
+    ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+  }),
+  sources = cmp.config.sources({
+    { name = 'nvim_lsp' },
+    -- { name = 'vsnip' }, -- For vsnip users.
+    -- { name = 'luasnip' }, -- For luasnip users.
+    -- { name = 'ultisnips' }, -- For ultisnips users.
+    -- { name = 'snippy' }, -- For snippy users.
+  }, {
+    { name = 'buffer' },
+    { name = 'codeium' },
+  })
+})
+
+-- To use git you need to install the plugin petertriho/cmp-git and uncomment lines below
+-- Set configuration for specific filetype.
+--[[ cmp.setup.filetype('gitcommit', {
+  sources = cmp.config.sources({
+    { name = 'git' },
+  }, {
+    { name = 'buffer' },
+  })
+})
+require("cmp_git").setup() ]]--
+
+-- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline({ '/', '?' }, {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = {
+    { name = 'buffer' }
+  }
+})
+
+-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline(':', {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = cmp.config.sources({
+    { name = 'path' }
+  }, {
+    { name = 'cmdline' }
+  }),
+  matching = { disallow_symbol_nonprefix_matching = false }
+})
+
+-- Set up lspconfig.
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+-- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
+require('lspconfig')['pyright'].setup {
+  capabilities = capabilities
+}
+
 require'lir'.setup {
   show_hidden_files = false,
-  ignore = {}, -- { ".DS_Store" "node_modules" } etc.
+  ignore = {"node_modules"}, -- { ".DS_Store" "node_modules" } etc.
   devicons = {
     enable = true
   },
@@ -63,7 +211,7 @@ require'lir'.setup {
     --   local height = math.floor(vim.o.lines * 0.8)
     --   return {
     --     border = {
-    --       "+", "─", "+", "│", "+", "─", "+", "│",
+    --       "+", "─", "+", "│", "+:", "─", "+", "│",
     --     },
     --     width = width,
     --     height = height,
@@ -132,7 +280,6 @@ require'lir'.setup {
 --
 -- npm install -g tree-sitter neovim
 ---apt install --yes -- python3-venv
---- :COQDeps COQNow
 
 -- set leader to comma
 g.mapleader = ','
@@ -165,10 +312,6 @@ require("mason").setup()
 -- To get fzf loaded and working with telescope, you need to call
 -- load_extension, somewhere after setup function:
 
-vim.g.coq_settings = {
-  auto_start = 'shut-up',
-  keymap = { jump_to_mark = '<C-your_key>' }
-}
 
 --
 
@@ -365,9 +508,12 @@ map( "n", "Ö", ":GitGutterPrevHunk<CR>", { noremap = true})
 map('n', '<space>v', ':vsplit | lua vim.lsp.buf.definition()<CR>', { noremap = true})
 map('n', '<space>s', ':belowright split | lua vim.lsp.buf.definition()<CR>', { noremap = true})
 
--- hop
--- vim.api.nvim_set_keymap('n', 'f', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>", {})
+map('n', '<space>d', ':lua vim.lsp.buf.hover()<CR>', { noremap = true})
 
+vim.keymap.set('i', '<C-g>', function () return vim.fn['codeium#Accept']() end, { expr = true, silent = true })
+vim.keymap.set('i', '<c-;>', function() return vim.fn['codeium#CycleCompletions'](1) end, { expr = true, silent = true })
+vim.keymap.set('i', '<c-,>', function() return vim.fn['codeium#CycleCompletions'](-1) end, { expr = true, silent = true })
+vim.keymap.set('i', '<c-x>', function() return vim.fn['codeium#Clear']() end, { expr = true, silent = true })
 -- vim.api.nvim_set_keymap('n', 'F', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>", {})
 -- vim.api.nvim_set_keymap('o', 'f', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true, inclusive_jump = true })<cr>", {})
 -- vim.api.nvim_set_keymap('o', 'F', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true, inclusive_jump = true })<cr>", {})

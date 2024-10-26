@@ -39,7 +39,7 @@ local util = require 'lspconfig/util'
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'tsserver', 'bashls', 'pyright', 'lua_ls', 'clangd' }
+local servers = { 'ts_ls', 'bashls', 'pyright', 'lua_ls', 'clangd' }
 
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
@@ -116,7 +116,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] =
     vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
         -- Disable underline, it's very annoying
         underline = false,
-        virtual_text = false,
+        virtual_text = true,
         -- Enable virtual text, override spacing to 4
         -- virtual_text = {spacing = 4},
         -- Use a function to dynamically turn signs off
