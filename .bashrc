@@ -8,7 +8,7 @@ export FLASK_RUN_PORT=8090
 
 setxkbmap -option caps:escape
 setxkbmap -option "nbsp:none"
-setxkbmap -option "shift:both_capslock"
+
 # ctrl+u to move up
 bind '"\C-u"':"\"cd ..\C-m\""
 
