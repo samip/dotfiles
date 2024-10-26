@@ -54,11 +54,16 @@ return require('packer').startup(function(use)
     }
   }
   use 'neovim/nvim-lspconfig'
-  use 'ms-jpq/coq_nvim'
+  -- use 'ms-jpq/coq_nvim'
+  use 'hrsh7th/cmp-nvim-lsp'
+  use 'hrsh7th/cmp-buffer'
+  use 'hrsh7th/cmp-path'
+  use 'hrsh7th/cmp-cmdline'
+  use 'hrsh7th/nvim-cmp'
   --use { 'ms-jpq/coq.artifacts', branch = 'artifacts' }
   --use 'psliwka/vim-smoothie'
   --use { "beauwilliams/focus.nvim", config = function() require("focus").setup() end }
-  use 'airblade/vim-gitgutter'
+  use { 'airblade/vim-gitgutter', branch = 'main' }
   use 'RRethy/nvim-treesitter-textsubjects'
   use 'JoosepAlviste/nvim-ts-context-commentstring'
   use {'junegunn/fzf', dir = '~/.fzf', run = './install --all' }
@@ -77,7 +82,38 @@ return require('packer').startup(function(use)
   use 'kyazdani42/nvim-web-devicons'
   use 'tpope/vim-abolish'
   use 'phelipetls/jsonpath.nvim'
-
+  -- use 'zbirenbaum/copilot.lua'
+  -- use 'github/copilot.vim'
+  -- use {
+  --   "zbirenbaum/copilot.lua",
+  --   cmd = "Copilot",
+  --   event = "InsertEnter",
+  --   config = function()
+  --     require("copilot").setup({})
+  --   end,
+  -- }
+	use {
+			"Exafunction/codeium.nvim",
+			requires = {
+					"nvim-lua/plenary.nvim",
+					"hrsh7th/nvim-cmp",
+			},
+			config = function()
+					require("codeium").setup({
+					})
+			end
+	}
+  use {
+    "nvim-neotest/neotest",
+    requires = {
+      "nvim-neotest/nvim-nio",
+      "nvim-lua/plenary.nvim",
+      "antoinemadec/FixCursorHold.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-neotest/neotest",
+      "nvim-neotest/neotest-python",
+    }
+  }
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if packer_bootstrap then
