@@ -6,9 +6,6 @@ local on_attach = function(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
-  -- Enable completion triggered by <c-x><c-o>
-  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
-  --require'completion'.on_attach
   -- Mappings.
   local opts = { noremap=true, silent=true }
 
@@ -48,48 +45,53 @@ for _, lsp in ipairs(servers) do
       debounce_text_changes = 150,
     }
   }
+  -- set up cmp
+  local capabilities = require('cmp_nvim_lsp').default_capabilities()
+  nvim_lsp[lsp].setup {
+    capabilities = capabilities
+  }
 end
 
-nvim_lsp.vuels.setup {
-	on_attach = function(client)
-			--[[
-		Internal Vetur formatting is not supported out of the box
+--nvim_lsp.vuels.setup {
+--  on_attach = function(client)
+--    --[[
+--        Internal Vetur formatting is not supported out of the box
 
-		This line below is required if you:
-				- want to format using Nvim's native `vim.lsp.buf.formatting**()`
-				- want to use Vetur's formatting config instead, e.g, settings.vetur.format {...}
-			--]]
-			client.resolved_capabilities.document_formatting = true
-			on_attach(client)
-	end,
-	capabilities = capabilities,
-	settings = {
-			vetur = {
-		completion = {
-				autoImport = true,
-				useScaffoldSnippets = true
-		},
-		format = {
-				defaultFormatter = {
-			html = "none",
-			js = "prettier",
-			ts = "prettier",
-				}
-		},
-		validation = {
-				template = true,
-				script = true,
-				style = true,
-				templateProps = true,
-				interpolation = true
-		},
-		experimental = {
-				templateInterpolationService = true
-		}
-			}
-	},
-	root_dir = util.root_pattern("header.php", "package.json", "style.css", 'webpack.config.js')
-}
+--        This line below is required if you:
+--                - want to format using Nvim's native `vim.lsp.buf.formatting**()`
+--                - want to use Vetur's formatting config instead, e.g, settings.vetur.format {...}
+--            --]]
+--    client.resolved_capabilities.document_formatting = true
+--    on_attach(client)
+--  end,
+--  capabilities = capabilities,
+--  settings = {
+--    vetur = {
+--      completion = {
+--        autoImport = true,
+--        useScaffoldSnippets = true
+--      },
+--      format = {
+--        defaultFormatter = {
+--          html = "none",
+--          js = "prettier",
+--          ts = "prettier",
+--        }
+--      },
+--      validation = {
+--        template = true,
+--        script = true,
+--        style = true,
+--        templateProps = true,
+--        interpolation = true
+--      },
+--      experimental = {
+--        templateInterpolationService = true
+--      }
+--    }
+--  },
+--  root_dir = util.root_pattern("header.php", "package.json", "style.css", 'webpack.config.js')
+--}
 
 nvim_lsp.gopls.setup {
   settings = {
@@ -102,25 +104,17 @@ nvim_lsp.gopls.setup {
     },
   },
 }
-vim.lsp.handlers["textDocument/publishDiagnostics"] =
-  vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics,
-  {
-    underline = false
-  }
-)
-
 
 -- diagnostics
 vim.lsp.handlers["textDocument/publishDiagnostics"] =
-    vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-        -- Disable underline, it's very annoying
-        underline = false,
-        virtual_text = true,
-        -- Enable virtual text, override spacing to 4
-        -- virtual_text = {spacing = 4},
-        -- Use a function to dynamically turn signs off
-        -- and on, using buffer local variables
-        signs = true,
-        update_in_insert = false
-    })
+vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+  -- Disable underline, it's very annoying
+  underline = false,
+  virtual_text = true,
+  -- Enable virtual text, override spacing to 4
+  -- virtual_text = {spacing = 4},
+  -- Use a function to dynamically turn signs off
+  -- and on, using buffer local variables
+  signs = true,
+  update_in_insert = false
+})
