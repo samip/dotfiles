@@ -177,7 +177,7 @@ return require('packer').startup(function(use)
     run = ':TSUpdate',
     config = function()
       require'nvim-treesitter.configs'.setup {
-        ensure_installed = { 'vue', 'javascript', 'typescript', 'lua', 'python', 'scss', 'css', 'tsx', 'jsx' },
+        ensure_installed = { 'vue', 'javascript', 'typescript', 'lua', 'python', 'scss', 'css', 'tsx', 'git_rebase' },
         highlight = { enable = true },
         indent = { enable = true },
         autotag = { enable = false },

@@ -182,7 +182,6 @@ _G.packer_plugins = {
     url = "https://github.com/mfussenegger/nvim-dap"
   },
   ["nvim-lspconfig"] = {
-    config = { "\27LJ\2\2ë\1\0\0\3\0\b\0\0146\0\0\0'\1\1\0B\0\2\0029\0\2\0B\0\1\0026\1\0\0'\2\3\0B\1\2\0029\1\4\0019\1\5\0015\2\6\0=\0\a\2B\1\2\1K\0\1\0\17capabilities\1\0\0\nsetup\fpyright\14lspconfig\25default_capabilities\17cmp_nvim_lsp\frequire\0" },
     loaded = true,
     path = "/home/sami/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
@@ -198,7 +197,7 @@ _G.packer_plugins = {
     url = "https://github.com/mfussenegger/nvim-treehopper"
   },
   ["nvim-treesitter"] = {
-    config = { "\27LJ\2\2à\4\0\0\4\0\19\0\0236\0\0\0'\1\1\0B\0\2\0029\0\2\0005\1\4\0005\2\3\0=\2\5\0015\2\6\0=\2\a\0015\2\b\0=\2\t\0015\2\n\0=\2\v\0015\2\f\0005\3\r\0=\3\14\2=\2\15\0015\2\16\0005\3\17\0=\3\14\2=\2\18\1B\0\2\1K\0\1\0\17textsubjects\1\0\3\6.\23textsubjects-smart\ai;!textsubjects-container-inner\6;!textsubjects-container-outer\1\0\2\19prev_selection\6,\venable\2\26incremental_selection\fkeymaps\1\0\4\19init_selection\bgnn\22scope_incremental\bgrc\21node_incremental\bgrn\21node_decremental\bgrm\1\0\1\venable\2\fautotag\1\0\1\venable\1\vindent\1\0\1\venable\2\14highlight\1\0\1\venable\2\21ensure_installed\1\0\0\1\b\0\0\bvue\15javascript\15typescript\blua\vpython\tscss\bcss\nsetup\28nvim-treesitter.configs\frequire\0" },
+    config = { "\27LJ\2\2ê\4\0\0\4\0\19\0\0236\0\0\0'\1\1\0B\0\2\0029\0\2\0005\1\4\0005\2\3\0=\2\5\0015\2\6\0=\2\a\0015\2\b\0=\2\t\0015\2\n\0=\2\v\0015\2\f\0005\3\r\0=\3\14\2=\2\15\0015\2\16\0005\3\17\0=\3\14\2=\2\18\1B\0\2\1K\0\1\0\17textsubjects\1\0\3\6.\23textsubjects-smart\ai;!textsubjects-container-inner\6;!textsubjects-container-outer\1\0\2\19prev_selection\6,\venable\2\26incremental_selection\fkeymaps\1\0\4\19init_selection\bgnn\22scope_incremental\bgrc\21node_incremental\bgrn\21node_decremental\bgrm\1\0\1\venable\2\fautotag\1\0\1\venable\1\vindent\1\0\1\venable\2\14highlight\1\0\1\venable\2\21ensure_installed\1\0\0\1\n\0\0\bvue\15javascript\15typescript\blua\vpython\tscss\bcss\btsx\bjsx\nsetup\28nvim-treesitter.configs\frequire\0" },
     loaded = true,
     path = "/home/sami/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
@@ -362,10 +361,10 @@ time([[Defining packer_plugins]], false)
 time([[Config for hop.nvim]], true)
 try_loadstring("\27LJ\2\2U\0\0\2\0\4\0\a6\0\0\0'\1\1\0B\0\2\0029\0\2\0005\1\3\0B\0\2\1K\0\1\0\1\0\1\tkeys\28etovxqpdygfblzhckisuran\nsetup\bhop\frequire\0", "config", "hop.nvim")
 time([[Config for hop.nvim]], false)
--- Config for: nvim-lspconfig
-time([[Config for nvim-lspconfig]], true)
-try_loadstring("\27LJ\2\2ë\1\0\0\3\0\b\0\0146\0\0\0'\1\1\0B\0\2\0029\0\2\0B\0\1\0026\1\0\0'\2\3\0B\1\2\0029\1\4\0019\1\5\0015\2\6\0=\0\a\2B\1\2\1K\0\1\0\17capabilities\1\0\0\nsetup\fpyright\14lspconfig\25default_capabilities\17cmp_nvim_lsp\frequire\0", "config", "nvim-lspconfig")
-time([[Config for nvim-lspconfig]], false)
+-- Config for: neotest
+time([[Config for neotest]], true)
+try_loadstring("\27LJ\2\2¸\1\0\0\6\0\v\1\0196\0\0\0'\1\1\0B\0\2\0029\0\2\0005\1\t\0004\2\3\0006\3\0\0'\4\3\0B\3\2\0025\4\5\0005\5\4\0=\5\6\0045\5\a\0=\5\b\4B\3\2\0?\3\0\0=\2\n\1B\0\2\1K\0\1\0\radapters\1\0\0\targs\1\3\0\0\16--log-level\nDEBUG\bdap\1\0\3\30pytest_discover_instances\2\vpython\21.venv/bin/python\vrunner\vpytest\1\0\1\15justMyCode\1\19neotest-python\nsetup\fneotest\frequire\3ÄÄ¿ô\4\0", "config", "neotest")
+time([[Config for neotest]], false)
 -- Config for: nvim-cmp
 time([[Config for nvim-cmp]], true)
 try_loadstring("\27LJ\2\2;\0\1\3\0\4\0\0066\1\0\0009\1\1\0019\1\2\0019\2\3\0B\1\2\1K\0\1\0\tbody\20vsnip#anonymous\afn\bvimª\5\1\0\b\0&\0Y6\0\0\0'\1\1\0B\0\2\0029\1\2\0005\2\6\0005\3\4\0003\4\3\0=\4\5\3=\3\a\0029\3\b\0009\3\t\0039\3\n\0035\4\f\0009\5\b\0009\5\v\5)\6¸ˇB\5\2\2=\5\r\0049\5\b\0009\5\v\5)\6\4\0B\5\2\2=\5\14\0049\5\b\0009\5\15\5B\5\1\2=\5\16\0049\5\b\0009\5\17\5B\5\1\2=\5\18\0049\5\b\0009\5\19\0055\6\20\0B\5\2\2=\5\21\4B\3\2\2=\3\b\0029\3\22\0009\3\23\0034\4\5\0005\5\24\0>\5\1\0045\5\25\0>\5\2\0045\5\26\0>\5\3\0045\5\27\0>\5\4\4B\3\2\2=\3\23\2B\1\2\0019\1\2\0009\1\28\0015\2\29\0005\3\30\0009\4\b\0009\4\t\0049\4\28\4B\4\1\2=\4\b\0034\4\3\0005\5\31\0>\5\1\4=\4\23\3B\1\3\0019\1\2\0009\1\28\1'\2 \0005\3!\0009\4\b\0009\4\t\0049\4\28\4B\4\1\2=\4\b\0039\4\22\0009\4\23\0044\5\3\0005\6\"\0>\6\1\0054\6\3\0005\a#\0>\a\1\6B\4\3\2=\4\23\0035\4$\0=\4%\3B\1\3\1K\0\1\0\rmatching\1\0\1'disallow_symbol_nonprefix_matching\1\1\0\1\tname\fcmdline\1\0\1\tname\tpath\1\0\0\6:\1\0\1\tname\vbuffer\1\0\0\1\3\0\0\6/\6?\fcmdline\1\0\1\tname\tpath\1\0\1\tname\fcodeium\1\0\1\tname\vbuffer\1\0\1\tname\rnvim_lsp\fsources\vconfig\t<CR>\1\0\1\vselect\2\fconfirm\n<C-e>\nabort\14<C-Space>\rcomplete\n<C-f>\n<C-b>\1\0\0\16scroll_docs\vinsert\vpreset\fmapping\fsnippet\1\0\0\vexpand\1\0\0\0\nsetup\bcmp\frequire\0", "config", "nvim-cmp")
@@ -396,12 +395,8 @@ try_loadstring("\27LJ\2\2O\0\0\1\0\2\0\0035\0\0\0007\0\1\0K\0\1\0\topts\1\0\3\26
 time([[Config for nvim-ts-autotag]], false)
 -- Config for: nvim-treesitter
 time([[Config for nvim-treesitter]], true)
-try_loadstring("\27LJ\2\2à\4\0\0\4\0\19\0\0236\0\0\0'\1\1\0B\0\2\0029\0\2\0005\1\4\0005\2\3\0=\2\5\0015\2\6\0=\2\a\0015\2\b\0=\2\t\0015\2\n\0=\2\v\0015\2\f\0005\3\r\0=\3\14\2=\2\15\0015\2\16\0005\3\17\0=\3\14\2=\2\18\1B\0\2\1K\0\1\0\17textsubjects\1\0\3\6.\23textsubjects-smart\ai;!textsubjects-container-inner\6;!textsubjects-container-outer\1\0\2\19prev_selection\6,\venable\2\26incremental_selection\fkeymaps\1\0\4\19init_selection\bgnn\22scope_incremental\bgrc\21node_incremental\bgrn\21node_decremental\bgrm\1\0\1\venable\2\fautotag\1\0\1\venable\1\vindent\1\0\1\venable\2\14highlight\1\0\1\venable\2\21ensure_installed\1\0\0\1\b\0\0\bvue\15javascript\15typescript\blua\vpython\tscss\bcss\nsetup\28nvim-treesitter.configs\frequire\0", "config", "nvim-treesitter")
+try_loadstring("\27LJ\2\2ê\4\0\0\4\0\19\0\0236\0\0\0'\1\1\0B\0\2\0029\0\2\0005\1\4\0005\2\3\0=\2\5\0015\2\6\0=\2\a\0015\2\b\0=\2\t\0015\2\n\0=\2\v\0015\2\f\0005\3\r\0=\3\14\2=\2\15\0015\2\16\0005\3\17\0=\3\14\2=\2\18\1B\0\2\1K\0\1\0\17textsubjects\1\0\3\6.\23textsubjects-smart\ai;!textsubjects-container-inner\6;!textsubjects-container-outer\1\0\2\19prev_selection\6,\venable\2\26incremental_selection\fkeymaps\1\0\4\19init_selection\bgnn\22scope_incremental\bgrc\21node_incremental\bgrn\21node_decremental\bgrm\1\0\1\venable\2\fautotag\1\0\1\venable\1\vindent\1\0\1\venable\2\14highlight\1\0\1\venable\2\21ensure_installed\1\0\0\1\n\0\0\bvue\15javascript\15typescript\blua\vpython\tscss\bcss\btsx\bjsx\nsetup\28nvim-treesitter.configs\frequire\0", "config", "nvim-treesitter")
 time([[Config for nvim-treesitter]], false)
--- Config for: neotest
-time([[Config for neotest]], true)
-try_loadstring("\27LJ\2\2¸\1\0\0\6\0\v\1\0196\0\0\0'\1\1\0B\0\2\0029\0\2\0005\1\t\0004\2\3\0006\3\0\0'\4\3\0B\3\2\0025\4\5\0005\5\4\0=\5\6\0045\5\a\0=\5\b\4B\3\2\0?\3\0\0=\2\n\1B\0\2\1K\0\1\0\radapters\1\0\0\targs\1\3\0\0\16--log-level\nDEBUG\bdap\1\0\3\30pytest_discover_instances\2\vpython\21.venv/bin/python\vrunner\vpytest\1\0\1\15justMyCode\1\19neotest-python\nsetup\fneotest\frequire\3ÄÄ¿ô\4\0", "config", "neotest")
-time([[Config for neotest]], false)
 
 _G._packer.inside_compile = false
 if _G._packer.needs_bufread == true then
