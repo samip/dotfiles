@@ -32,7 +32,6 @@ require("cmp_git").setup() ]]--
 -- set leader to comma
 g.mapleader = ','
 g.maplocalleader = ','
-
 require('plugins')
 require('telescope_settings')
 cmd('set termguicolors')

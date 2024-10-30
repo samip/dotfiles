@@ -2,6 +2,7 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 if [ -f ~/.openai_key ]; then export OPENAI_API_KEY=$(cat ~/.openai_key); fi
+if [ -f ~/.claude_key ]; then export ANTHROPIC_API_KEY=$(cat ~/.claude_key); fi
 export EVENTLET_HUB=poll # (might be only necessary on macOS)
 export FLASK_CONFIGURATION=development
 export FLASK_RUN_PORT=8090
@@ -308,3 +309,4 @@ export PROMPT_COMMAND="load-nvmrc; $PROMPT_COMMAND"
 export ANDROID_HOME=/opt/android-sdk
 export PATH=$PATH:/opt/android-sdk/platform-tools
 export XDG_RUNTIME_DIR="~/.tmp"
+. "$HOME/.cargo/env"

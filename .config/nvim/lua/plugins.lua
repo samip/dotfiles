@@ -73,6 +73,13 @@ return require('packer').startup(function(use)
       }
     end
   }
+	use {
+		'MeanderingProgrammer/render-markdown.nvim',
+		opts = {
+			file_types = { "markdown", "Avante" },
+		},
+		ft = { "markdown", "Avante" },
+	}
 	use 'norcalli/nvim-colorizer.lua'
 	use {
 		'williamboman/mason.nvim',
@@ -159,20 +166,38 @@ return require('packer').startup(function(use)
       })
     end
   }
-  use {
-    "Exafunction/codeium.vim",
-    requires = {
-      "nvim-lua/plenary.nvim",
-      "hrsh7th/nvim-cmp",
-    },
-    config = function()
-			vim.keymap.set('i', '<C-g>', function () return vim.fn['codeium#Accept']() end, { expr = true, silent = true })
-			vim.keymap.set('i', '<c-;>', function() return vim.fn['codeium#CycleCompletions'](1) end, { expr = true, silent = true })
-			vim.keymap.set('i', '<c-,>', function() return vim.fn['codeium#CycleCompletions'](-1) end, { expr = true, silent = true })
-			vim.keymap.set('i', '<c-x>', function() return vim.fn['codeium#Clear']() end, { expr = true, silent = true })
-      vim.keymap.set('n', '<c-a>', function() return vim.fn['codeium#Open']() end, { expr = true, silent = true })
-    end
-  }
+	use {
+		'MunifTanjim/nui.nvim',
+	}
+	use 'stevearc/dressing.nvim'
+	use 'nvim-lua/plenary.nvim'
+	use {
+		'yetone/avante.nvim',
+		build = "make",
+		lazy = true,
+		version = false,
+		BUILD_FROM_SOURCE = true,
+		requires = {
+			'nvim-tree/nvim-web-devicons',
+			'stevearc/dressing.nvim',
+			'nvim-lua/plenary.nvim',
+			'MunifTanjim/nui.nvim',
+			{
+				'MeanderingProgrammer/render-markdown.nvim',
+				config = function()
+					require('render-markdown').setup({
+						file_types = { "markdown", "Avante" },
+					})
+				end,
+			},
+		},
+		config = function()
+			require('avante.config')
+			require("avante_lib").load()
+			require("avante").setup()
+		end,
+		run = 'make', -- Optional, only if you want to use tiktoken_core to calculate tokens count
+	}
   use {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
