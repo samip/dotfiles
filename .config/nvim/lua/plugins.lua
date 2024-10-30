@@ -112,6 +112,7 @@ return require('packer').startup(function(use)
 	use {
     'hrsh7th/nvim-cmp',
     requires = {
+			"Exafunction/codeium.vim",
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-path',

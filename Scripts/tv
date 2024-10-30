@@ -1,8 +1,8 @@
 #!/bin/sh
 
 # Login info for raspberry pi
-rasp_user="root"
-rasp_host="libreELEC"
+rasp_user="sami"
+rasp_host="raspi"
 
 case $1 in
   off|standby)
