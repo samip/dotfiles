@@ -170,7 +170,7 @@ cmd [[
 map ( "n", "<leader>d", ":GitGutterQuickFix<CR> <cmd>lua require('telescope.builtin').quickfix()<CR>", { noremap = true })
 
 -- navige splits with ctrl+h/j/k/l
-map( "n", "<leader>a", ":Git blame<cr>", { noremap = true })
+-- map( "n", "<leader>a", ":Git blame<cr>", { noremap = true })
 
 map( "n", "<C-J>", "<C-W><C-J>", { noremap = true }
 )
