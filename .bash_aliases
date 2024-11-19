@@ -20,6 +20,9 @@ alias lt="lsd -a --tree"
 alias dots='[ -d ~/dotfiles ] && cd ~/dotfiles || cd ~/Documents/dotfiles'
 alias cd="z"
 
+# https://github.com/kharvd/gpt-cli?
+alias robo="gpt --model claude-3-opus-20240229"
+
 #oc() {
     #nvim $(git diff main.. --name-only | grep -e '\.vue$|\.js$')
 #}
