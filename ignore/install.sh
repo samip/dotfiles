@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 is_wsl() {
     grep -qEi "(Microsoft|WSL)" /proc/sys/kernel/osrelease
