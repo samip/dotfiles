@@ -62,6 +62,11 @@ exit_if_screen() {
     fi
 }
 
+function boot_windows {
+    WINDOWS_TITLE=`grep -i "^menuentry 'Windows" /boot/grub/grub.cfg|head -n 1|cut -d"'" -f2`
+    sudo grub-reboot "$WINDOWS_TITLE"
+    sudo reboot
+}
 alias dc="docker compose"
 alias e="$EDITOR"
 alias wpl="pushd ~/Documents/custobar/compose/ && docker-compose --env-file .env.webpack logs -f webpack  && popd"
