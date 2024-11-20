@@ -101,7 +101,7 @@ then
     curl -sS https://starship.rs/install.sh | sudo sh
 fi
 
-if ! command -v z > /dev/null
+if ! command -v zoxide > /dev/null
 then
     curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
 fi
