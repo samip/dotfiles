@@ -6,7 +6,7 @@ is_wsl() {
 
 add-apt-repository ppa:neovim-ppa/unstable
 sudo apt-get update
-sudo  apt-get install -y tmux stow tig neovim xclip bat git fd-find ripgrep \
+sudo apt-get install -y tmux stow tig neovim xclip bat git fd-find ripgrep \
     xclip screen curl ca-certificates build-essential
 
 # Check if running in WSL
@@ -66,12 +66,13 @@ then
     popd
 fi
 
-# https://github.com/mwh/dragon
-
-if ! command -v fzf > /dev/null
+if [ ! -f "$HOME/.fzf.bash" ]
 then
-    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-    # ~/.fzf/install --all
+    if [ ! -d "$HOME/.fzf" ]
+    then
+        git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+    fi
+    bash ~/.fzf/install --no-update-rc --no-zsh --no-fish --completion --key-bindings
 fi
 
 git config --global alias.st status
@@ -91,9 +92,10 @@ then
     wget "$lsd_repo_url/releases/download/0.21.0/$lsd_deb_name" && dpkg -i $lsd_deb_name && rm $lsd_deb_name
 fi
 
-if ! command -v nvm > /dev/null
+if [ ! -d "$HOME/.nvm" ]
 then
     wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+    rm install.sh
 fi
 
 if ! command -v starship > /dev/null

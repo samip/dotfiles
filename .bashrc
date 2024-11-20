@@ -9,6 +9,7 @@ if command -v setxkbmap > /dev/null
 then
     setxkbmap -option caps:escape
     setxkbmap -option "nbsp:none"
+    xset r rate 250 40
 fi
 
 # ctrl+u to move up
@@ -131,7 +132,9 @@ fi
 if [ -f ~/.localrc ]; then
     . ~/.localrc
 fi
-xset r rate 250 40
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
@@ -145,15 +148,17 @@ fi
 
 
 # BEGIN_KITTY_SHELL_INTEGRATION
-if test -n "$KITTY_INSTALLATION_DIR" -a -e "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; then source "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; fi
+if command -v kitty > /dev/null
+then
+    if test -n "$KITTY_INSTALLATION_DIR" -a -e "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; then source "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; fi
+fi
 # END_KITTY_SHELL_INTEGRATION
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 eval "$(starship init bash)"
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && source "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 nvm use &> /dev/null # load version from .nvmrc
 # nvm use 18.17.0 > /dev/null
 export GIT_EDITOR=nvim
@@ -318,7 +323,7 @@ load-nvmrc() {
 export PROMPT_COMMAND="load-nvmrc; $PROMPT_COMMAND"
 
 export ANDROID_HOME=/opt/android-sdk
-export PATH=$PATH:/opt/android-sdk/platform-tools
+export PATH=$PATH:/opt/android-sdk/platform-tools:$HOME/.local/bin
 if [ ! -d ~/.tmp ]; then
     mkdir ~/.tmp
 fi
