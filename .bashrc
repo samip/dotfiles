@@ -4,11 +4,12 @@
 if [ -f ~/.openai_key ]; then export OPENAI_API_KEY=$(cat ~/.openai_key); fi
 if [ -f ~/.claude_key ]; then export ANTHROPIC_API_KEY=$(cat ~/.claude_key); fi
 export EVENTLET_HUB=poll # (might be only necessary on macOS)
-export FLASK_CONFIGURATION=development
-export FLASK_RUN_PORT=8090
 
-setxkbmap -option caps:escape
-setxkbmap -option "nbsp:none"
+if command -v setxkbmap > /dev/null
+then
+    setxkbmap -option caps:escape
+    setxkbmap -option "nbsp:none"
+fi
 
 # ctrl+u to move up
 bind '"\C-u"':"\"cd ..\C-m\""
@@ -18,10 +19,12 @@ case $- in
     *i*) ;;
       *) return;;
 esac
-export PATH="$PATH:$HOME/.local/bin:/opt/sonar-scanner/bin/:"
 
 # https://github.com/ajeetdsouza/zoxide
-eval "$(zoxide init bash)"
+if command -v zoxide > /dev/null
+then
+    eval "$(zoxide init bash)"
+fi
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
@@ -282,11 +285,19 @@ fi
 #
 # eval "$(zoxide init bash)"
 
-screen -S greenclip -X select . > /dev/null || screen -dmS greenclip greenclip daemon
+if command -v greenclip > /dev/null
+then
+    screen -S greenclip -X select . > /dev/null || screen -dmS greenclip greenclip daemon
+fi
 
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+
+
+export PYENV_PATH="$HOME/.pyenv/bin"
+if [[ -d $PYENV_PATH ]]; then
+    export PATH="$PYENV_PATH:$PATH"
+    eval "$(pyenv init -)"
+fi
+
 export ANDROID_HOME=/opt/android-sdk
 
 # Function to automatically load Node version from .node-version file
@@ -308,4 +319,7 @@ export PROMPT_COMMAND="load-nvmrc; $PROMPT_COMMAND"
 
 export ANDROID_HOME=/opt/android-sdk
 export PATH=$PATH:/opt/android-sdk/platform-tools
+if [ ! -d ~/.tmp ]; then
+    mkdir ~/.tmp
+fi
 export XDG_RUNTIME_DIR="~/.tmp"
