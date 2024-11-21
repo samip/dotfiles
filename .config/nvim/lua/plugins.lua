@@ -11,7 +11,6 @@ end
 
 local packer_bootstrap = ensure_packer()
 
-vim.cmd [[packadd packer.nvim]]
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
   -- My plugins here
@@ -56,7 +55,7 @@ return require('packer').startup(function(use)
     'JoosepAlviste/nvim-ts-context-commentstring',
     config = function()
       require('ts_context_commentstring').setup {
-				enable_autocmd = false,
+        enable_autocmd = false,
       }
     end
   }
@@ -66,54 +65,72 @@ return require('packer').startup(function(use)
     'windwp/nvim-ts-autotag',
     requires = 'nvim-treesitter/nvim-treesitter',
     config = function()
-      opts = {
+      require('nvim-ts-autotag').setup({
         -- Defaults
         enable_close = true, -- Auto close tags
         enable_rename = true, -- Auto rename pairs of tags
         enable_close_on_slash = false -- Auto close on trailing </
+      })
+    end
+  }
+  use 'norcalli/nvim-colorizer.lua'
+  use {
+    'williamboman/mason.nvim',
+    config = function()
+      require('mason').setup({
+        ui = {
+          icons = {
+            package_installed = "V",
+            package_pending = "?",
+            package_uninstalled = "?"
+          }
+        }})
+    end
+  }
+  use {
+    'williamboman/mason-lspconfig.nvim',
+    config = function()
+      require('mason-lspconfig').setup({
+        automatic_installation = true,
+        ensure_installed = { 'lua_ls', 'bashls', 'pyright', 'ts_ls', 'clangd' }
+      })
+      require("mason-lspconfig").setup_handlers {
+        -- The first entry (without a key) will be the default handler
+        -- and will be called for each installed server that doesn't have
+        -- a dedicated handler.
+        function (server_name) -- default handler (optional)
+          require("lspconfig")[server_name].setup {}
+        end
       }
     end
   }
-	use 'norcalli/nvim-colorizer.lua'
-	use {
-		'williamboman/mason.nvim',
-		config = function()
-			require('mason').setup({
-				ui = {
-					icons = {
-						package_installed = "V",
-						package_pending = "?",
-						package_uninstalled = "?"
-					}
-				}})
-		end
-	}
-	use {
-		'ruifm/gitlinker.nvim',
-		requires = 'nvim-lua/plenary.nvim',
-		config = function()
-			require"gitlinker".setup({
-				opts = {
-					print_url = true,
-				},
-				callbacks = {
-					["gitlab.custobar.com"] = require"gitlinker.hosts".get_gitlab_type_url,
-				},
-				-- default mapping to call url generation with action_callback
-				mappings = "<leader>gy"
-			})
-		end
-	}
+  use 'neovim/nvim-lspconfig'
+  use {
+    'ruifm/gitlinker.nvim',
+    requires = 'nvim-lua/plenary.nvim',
+    config = function()
+      require"gitlinker".setup({
+        opts = {
+          print_url = true,
+        },
+        callbacks = {
+          ["gitlab.custobar.com"] = require"gitlinker.hosts".get_gitlab_type_url,
+        },
+        -- default mapping to call url generation with action_callback
+        mappings = "<leader>gy"
+      })
+    end
+  }
   use 'mfussenegger/nvim-dap'
   use 'sunjon/shade.nvim'
   use 'drybalka/tree-climber.nvim'
   use 'kyazdani42/nvim-web-devicons'
   use 'tpope/vim-abolish'
   use 'phelipetls/jsonpath.nvim'
-	use {
+  use {
     'hrsh7th/nvim-cmp',
     requires = {
-			"Exafunction/codeium.vim",
+      "Exafunction/codeium.vim",
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-path',
@@ -154,8 +171,8 @@ return require('packer').startup(function(use)
         sources = cmp.config.sources({
           { name = 'path' }
         }, {
-          { name = 'cmdline' }
-        }),
+            { name = 'cmdline' }
+          }),
         matching = { disallow_symbol_nonprefix_matching = false }
       })
     end
@@ -167,10 +184,10 @@ return require('packer').startup(function(use)
       "hrsh7th/nvim-cmp",
     },
     config = function()
-			vim.keymap.set('i', '<C-g>', function () return vim.fn['codeium#Accept']() end, { expr = true, silent = true })
-			vim.keymap.set('i', '<c-;>', function() return vim.fn['codeium#CycleCompletions'](1) end, { expr = true, silent = true })
-			vim.keymap.set('i', '<c-,>', function() return vim.fn['codeium#CycleCompletions'](-1) end, { expr = true, silent = true })
-			vim.keymap.set('i', '<c-x>', function() return vim.fn['codeium#Clear']() end, { expr = true, silent = true })
+      vim.keymap.set('i', '<C-g>', function () return vim.fn['codeium#Accept']() end, { expr = true, silent = true })
+      vim.keymap.set('i', '<c-;>', function() return vim.fn['codeium#CycleCompletions'](1) end, { expr = true, silent = true })
+      vim.keymap.set('i', '<c-,>', function() return vim.fn['codeium#CycleCompletions'](-1) end, { expr = true, silent = true })
+      vim.keymap.set('i', '<c-x>', function() return vim.fn['codeium#Clear']() end, { expr = true, silent = true })
       vim.keymap.set('n', '<c-a>', function() return vim.fn['codeium#Open']() end, { expr = true, silent = true })
     end
   }
@@ -204,7 +221,6 @@ return require('packer').startup(function(use)
       }
     end
   }
-  use 'neovim/nvim-lspconfig'
   use {
     'nvim-neotest/neotest',
     requires = {
@@ -228,12 +244,11 @@ return require('packer').startup(function(use)
       })
     end
   }
-
   use {
     'tamago324/lir.nvim',
-		requires = {
-			'kyazdani42/nvim-web-devicons'
-		},
+    requires = {
+      'kyazdani42/nvim-web-devicons'
+    },
     config = function()
       local actions = require'lir.actions'
       local mark_actions = require 'lir.mark.actions'
