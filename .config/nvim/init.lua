@@ -1,4 +1,7 @@
+require('plugins')
 require('lsp')
+require('telescope_settings')
+
 local map = vim.api.nvim_set_keymap  -- set global keymap
 
 local cmd = vim.cmd     				-- execute Vim commands
@@ -33,8 +36,6 @@ require("cmp_git").setup() ]]--
 g.mapleader = ','
 g.maplocalleader = ','
 
-require('plugins')
-require('telescope_settings')
 cmd('set termguicolors')
 require'colorizer'.setup()
 
