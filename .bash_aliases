@@ -1,13 +1,18 @@
 #!/bin/bash
+
+is_wsl() {
+    grep -qEi "(Microsoft|WSL)" /proc/sys/kernel/osrelease
+}
+
+is_wsl && export wsl_clip='clip.exe'
+
 alias so="source"
 alias xcp="kitty +kitten clipboard"
 alias gdiff="git difftool --no-symlinks --dir-diff"
 alias img="kitty +kitten icat"
 alias apti="sudo apt-get install"
 alias apts="apt-cache search"
-alias setclip="xclip -selection c"
-alias getclip="xclip -selection c -o"
-alias vs="cd /opt/vivaldi-snapshot/resources/vivaldi"
+alias setclip="${wsl_clip:-"xclip -selection c"}"
 alias :q="exit"
 alias x="xdg-open"
 alias ff="ls | fzf --header 'Use CTRL-C to cancel' --reverse --preview='bat {}'"
@@ -49,12 +54,6 @@ activ()
     folder=$(pwd)
     ln -sfn "$folder" ~/Documents/custobar/custobar
 }
-
-# dc() {
-#     pushd ~/Documents/custobar/compose/
-#     docker-compose "$1"
-#     popd
-# }
 
 fco() {
     branch="$(git branch -l | fzf)"
