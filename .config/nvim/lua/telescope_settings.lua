@@ -19,6 +19,18 @@ vim.api.nvim_set_keymap("n", "<leader>pw",  "[[<Cmd>lua require('telescope.built
 
 
 require('telescope').setup{
+  defaults = {
+    mappings = {
+      i = { -- Insert mode
+        ["<C-V>"] = require('telescope.actions').select_vertical,  -- Ctrl+Shift+v
+        ["<C-S>"] = require('telescope.actions').select_horizontal -- Ctrl+Shift+s
+      },
+      n = { -- Normal mode
+        ["<C-V>"] = require('telescope.actions').select_vertical,  -- Ctrl+Shift+v
+        ["<C-S>"] = require('telescope.actions').select_horizontal -- Ctrl+Shift+s
+      },
+    },
+  },
   prompt_prefix = "> ",
   extensions = {
     fzf = {
