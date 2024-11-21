@@ -27,6 +27,12 @@ alias robo="gpt --model claude-3-opus-20240229"
     #nvim $(git diff main.. --name-only | grep -e '\.vue$|\.js$')
 #}
 
+tm() {
+  dir_name="$(basename $(pwd))"
+  tmux new-session -s $dir_name
+}
+
+
 goto() {
     shortcut_locations="$HOME/.config/shortcut-locations"
     test -f "$shortcut_locations" && cd "$(cat $shortcut_locations | fzf)"
