@@ -1,3 +1,32 @@
+require('mason').setup({
+  ui = {
+    icons = {
+      package_installed = "V",
+      package_pending = "?",
+      package_uninstalled = "?"
+    }
+  }
+})
+
+require("mason-lspconfig").setup({
+  automatic_installation = true,
+  ensure_installed = { 'lua_ls', 'bashls', 'pyright', 'ts_ls', 'clangd' },
+})
+
+require("mason-lspconfig").setup_handlers {
+  -- The first entry (without a key) will be the default handler
+  -- and will be called for each installed server that doesn't have
+  -- a dedicated handler.
+  function (server_name) -- default handler (optional)
+    require("lspconfig")[server_name].setup {}
+  end,
+  -- Next, you can provide a dedicated handler for specific servers.
+  -- For example, a handler override for the `rust_analyzer`:
+  ["rust_analyzer"] = function ()
+    require("rust-tools").setup {}
+  end
+}
+
 local nvim_lsp = require('lspconfig')
 
 -- Use an on_attach function to only map the following keys
@@ -93,17 +122,17 @@ end
 --  root_dir = util.root_pattern("header.php", "package.json", "style.css", 'webpack.config.js')
 --}
 
-nvim_lsp.gopls.setup {
-  settings = {
-    gopls = {
-      analyses = {
-        unusedparams = true,
-      },
-      staticcheck = true,
-      gofumpt = true,
-    },
-  },
-}
+-- nvim_lsp.gopls.setup {
+--   settings = {
+--     gopls = {
+--       analyses = {
+--         unusedparams = true,
+--       },
+--       staticcheck = true,
+--       gofumpt = true,
+--     },
+--   },
+-- }
 
 -- diagnostics
 vim.lsp.handlers["textDocument/publishDiagnostics"] =

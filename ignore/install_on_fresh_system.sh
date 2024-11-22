@@ -1,8 +1,6 @@
 #!/bin/bash
 
-SCRIPT_PATH=$(dirname $(realpath "$0"))
-cd "$SCRIPT_PATH/.."
-stow_params="--target=$HOME --ignore=ignore/ --ignore=README.md"
+stow_params="--target=$HOME source=.."
 
 # Hack to enable overwriting default configs
 # Stow will create a symlink and overwrite the files inside your repository and git will undo the changes and return to the original files but the symlinks will stay there.

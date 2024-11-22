@@ -67,43 +67,17 @@ return require('packer').startup(function(use)
     config = function()
       require('nvim-ts-autotag').setup({
         -- Defaults
-        enable_close = true, -- Auto close tags
-        enable_rename = true, -- Auto rename pairs of tags
-        enable_close_on_slash = false -- Auto close on trailing </
+        opts = {
+          enable_close = true, -- Auto close tags
+          enable_rename = true, -- Auto rename pairs of tags
+          enable_close_on_slash = false -- Auto close on trailing </
+        }
       })
     end
   }
   use 'norcalli/nvim-colorizer.lua'
-  use {
-    'williamboman/mason.nvim',
-    config = function()
-      require('mason').setup({
-        ui = {
-          icons = {
-            package_installed = "V",
-            package_pending = "?",
-            package_uninstalled = "?"
-          }
-        }})
-    end
-  }
-  use {
-    'williamboman/mason-lspconfig.nvim',
-    config = function()
-      require('mason-lspconfig').setup({
-        automatic_installation = true,
-        ensure_installed = { 'lua_ls', 'bashls', 'pyright', 'ts_ls', 'clangd' }
-      })
-      require("mason-lspconfig").setup_handlers {
-        -- The first entry (without a key) will be the default handler
-        -- and will be called for each installed server that doesn't have
-        -- a dedicated handler.
-        function (server_name) -- default handler (optional)
-          require("lspconfig")[server_name].setup {}
-        end
-      }
-    end
-  }
+  use 'williamboman/mason.nvim'
+  use 'williamboman/mason-lspconfig.nvim'
   use 'neovim/nvim-lspconfig'
   use {
     'ruifm/gitlinker.nvim',
@@ -124,7 +98,6 @@ return require('packer').startup(function(use)
   use 'mfussenegger/nvim-dap'
   use 'sunjon/shade.nvim'
   use 'drybalka/tree-climber.nvim'
-  use 'kyazdani42/nvim-web-devicons'
   use 'tpope/vim-abolish'
   use 'phelipetls/jsonpath.nvim'
   use {

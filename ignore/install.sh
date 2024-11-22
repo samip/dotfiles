@@ -34,6 +34,7 @@ then
         sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
     sudo apt-get update
     sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+    sudo usermod -a -G docker $USER
 fi
 
 if ! command -v tldr > /dev/null
@@ -75,7 +76,7 @@ then
     bash ~/.fzf/install --no-update-rc --no-zsh --no-fish --completion --key-bindings
 fi
 
-git config --global alias.st status
+git config --global alias.st status --show-stash
 git config --global alias.last 'log -1 HEAD'
 git config --global alias.ll log --oneline
 git config --global alias.d diff
