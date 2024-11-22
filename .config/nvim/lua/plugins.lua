@@ -29,10 +29,19 @@ return require('packer').startup(function(use)
   use 'tpope/vim-projectionist'
   use 'tpope/vim-rhubarb'
   use 'tpope/vim-sensible'
-  use 'tpope/vim-surround'
+  use({
+    "kylechui/nvim-surround",
+    tag = "*", -- Use for stability; omit to use `main` branch for the latest features
+    config = function()
+      require("nvim-surround").setup({
+        -- Configuration here, or leave empty to use defaults
+      })
+    end
+  })
   use 'tpope/vim-vinegar' -- file browsing with -
   use 'tpope/vim-repeat' -- file browsing with -
   use 'vim-airline/vim-airline'
+  use 'vim-airline/vim-airline-themes'
   use 'mfussenegger/nvim-treehopper'
   use 'nvim-treesitter/playground'
   use {
