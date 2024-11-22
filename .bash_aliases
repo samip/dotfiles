@@ -33,8 +33,17 @@ alias robo="gpt --model claude-3-opus-20240229"
 #}
 
 tm() {
-  dir_name="$(basename $(pwd))"
-  tmux new-session -s $dir_name
+  if [[ -z "$1" ]]; then
+    dir=$(pwd)
+  else
+    dir=$(zoxide query "$1")
+    if [[ $? != 0 ]]; then
+      echo "No result"
+      return
+    fi
+  fi
+  dir_name="$(basename "$dir")"
+  tmux new-session -s "$dir_name" -c "$dir" || tmux attach -t "$dir_name"
 }
 
 
