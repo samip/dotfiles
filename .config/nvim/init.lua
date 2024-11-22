@@ -15,22 +15,6 @@ vim.g.loaded_netrwPlugin = 1
 -- set termguicolors to enable highlight groups
 vim.opt.termguicolors = true
 
-
--- To use git you need to install the plugin petertriho/cmp-git and uncomment lines below
--- Set configuration for specific filetype.
---[[ cmp.setup.filetype('gitcommit', {
-  sources = cmp.config.sources({
-    { name = 'git' },
-  }, {
-    { name = 'buffer' },
-  })
-})
-require("cmp_git").setup() ]]--
-
-
--- npm install -g tree-sitter neovim
----apt install --yes -- python3-venv
-
 -- set leader to comma
 g.mapleader = ','
 g.maplocalleader = ','
@@ -72,6 +56,13 @@ exec([[
   augroup end
 ]], false)
 
+-- Set up an autocmd for window resize
+vim.api.nvim_create_autocmd("VimResized", {
+  callback = function()
+    -- Execute your desired window command here
+    vim.cmd("wincmd =")  -- Adjust the window layout after resizing
+  end,
+})
 -- require('telescope').load_extension('fzf')
 
 vim.g.skip_ts_context_commentstring_module = true
