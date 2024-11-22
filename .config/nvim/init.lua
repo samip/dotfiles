@@ -1,7 +1,6 @@
 require('plugins')
 require('lsp')
 require('telescope_settings')
-
 local map = vim.api.nvim_set_keymap  -- set global keymap
 
 local cmd = vim.cmd     				-- execute Vim commands
@@ -63,7 +62,7 @@ opt.list = true               -- show whitespace
 
 cmd [[au Filetype lua setl omnifunc=v:lua.vim.lsp.omnifunc ]]
 -- remove whitespace on save
-cmd [[au BufWritePre * :%s/\s\+$//e]]
+-- cmd [[au BufWritePre * :%s/\s\+$//e]]
 
 -- highlight on yank
 exec([[
@@ -213,3 +212,4 @@ map('n', '<space>d', ':lua vim.lsp.buf.hover()<CR>', { noremap = true})
 --vim.api.nvim_set_keymap('n', 'J', "<cmd> lua require'hop'.hint_lines({})<cr>", {})
 
 cmd('source ~/.config/nvim/addon.vim')
+
