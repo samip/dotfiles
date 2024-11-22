@@ -98,7 +98,26 @@ if vim.fn.exists("+winbar") == 1 then
   opt.winbar = "%{%v:lua.require'jsonpath'.get()%} %=%m %f "
 end
 
+vim.cmd([[
+  command! V lua OpenConfig("~/.config/nvim/", "init.lua", "lua/plugins.lua")
+  command! I lua OpenConfig("~/.config/regolith3/", "Xresources", "i3/config.d/*")
+]])
 
+function OpenConfig(dir, file1, file2, file3)
+  local function open_files(name)
+    vim.cmd("args " .. name .. " | argdo vsplit")
+  end
+
+  vim.cmd("tabnew")                       -- Open a new tab
+  vim.cmd("cd " .. dir)                  -- Change directory to the specified `dir`
+  if file2 then                           -- If a second file is provided
+    open_files(file2)                  -- Open the first file
+  end
+  if file3 then                           -- If a third file is provided
+    open_files(file3)                  -- Open the first file
+  end
+  vim.cmd("vsp " .. file1)                  -- Open the first file
+end
 
 -- don't auto comment new lines
 cmd [[au BufEnter * set fo-=c fo-=r fo-=o]]
