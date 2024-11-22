@@ -229,4 +229,3 @@ vim.cmd [[
 ]]
 
 cmd('source ~/.config/nvim/addon.vim')
-
