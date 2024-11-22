@@ -211,5 +211,12 @@ map('n', '<space>d', ':lua vim.lsp.buf.hover()<CR>', { noremap = true})
 --vim.api.nvim_set_keymap('n', 'K', "<cmd> lua require'hop'.hint_lines({})<cr>", {})
 --vim.api.nvim_set_keymap('n', 'J', "<cmd> lua require'hop'.hint_lines({})<cr>", {})
 
+vim.cmd [[
+  highlight Normal guibg=none
+  highlight NonText guibg=none
+  highlight Normal ctermbg=none
+  highlight NonText ctermbg=none
+]]
+
 cmd('source ~/.config/nvim/addon.vim')
 
