@@ -1,3 +1,5 @@
 Install necessary packages by running `install.sh`
 
-Install config `stow .  --ignore=init/ --ignore=\init --ignore=install.sh`
+Install packages: `./ignore/install.sh`
+
+Install config `stow . --target=$HOME --ignore=ignore`

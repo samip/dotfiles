@@ -1,4 +1,5 @@
 " let g:tmux_navigator_no_mappings = 1
+
 let g:airline_section_b = ''
 
 nnoremap <C-h> :TmuxNavigateLeft<CR>
@@ -21,3 +22,6 @@ nnoremap <leader>gw :lua require('telescope').extensions.git_worktree.git_worktr
 nnoremap <leader>gm :lua require('telescope').extensions.git_worktree.create_git_worktree()<CR>
 
 highlight LineNr guifg=#fff
+
+
+let g:airline_theme='bubblegum'

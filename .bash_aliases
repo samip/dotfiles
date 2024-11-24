@@ -1,19 +1,24 @@
 #!/bin/bash
+
+is_wsl() {
+    grep -qEi "(Microsoft|WSL)" /proc/sys/kernel/osrelease
+}
+
+is_wsl && export wsl_clip='clip.exe'
+
 alias so="source"
 alias xcp="kitty +kitten clipboard"
 alias gdiff="git difftool --no-symlinks --dir-diff"
 alias img="kitty +kitten icat"
 alias apti="sudo apt-get install"
 alias apts="apt-cache search"
-alias setclip="xclip -selection c"
-alias getclip="xclip -selection c -o"
-alias vs="cd /opt/vivaldi-snapshot/resources/vivaldi"
+alias setclip="${wsl_clip:-"xclip -selection c"}"
 alias :q="exit"
 alias x="xdg-open"
 alias ff="ls | fzf --header 'Use CTRL-C to cancel' --reverse --preview='bat {}'"
 alias dragon="dragon 2>/dev/null"
-alias :v="(cd ~/.config/nvim/ && nvim -O init.lua lua/plugins.lua)"
-alias :i="(cd ~/.config/regolith3/i3/config.d && nvim -O *)"
+alias :v="cd ~/.config/nvim/ && nvim -O init.lua lua/plugins.lua"
+alias :i="cd ~/.config/regolith3/i3/config.d && nvim -O *"
 alias upd="sudo apt update && sudo apt upgrade"
 alias ll="lsd -la"
 alias lt="lsd -a --tree"
@@ -26,6 +31,21 @@ alias robo="gpt --model claude-3-opus-20240229"
 #oc() {
     #nvim $(git diff main.. --name-only | grep -e '\.vue$|\.js$')
 #}
+
+tm() {
+  if [[ -z "$1" ]]; then
+    dir=$(pwd)
+  else
+    dir=$(zoxide query "$1")
+    if [[ $? != 0 ]]; then
+      echo "No result"
+      return
+    fi
+  fi
+  dir_name="$(basename "$dir")"
+  tmux new-session -s "$dir_name" -c "$dir" || tmux attach -t "$dir_name"
+}
+
 
 goto() {
     shortcut_locations="$HOME/.config/shortcut-locations"
@@ -43,12 +63,6 @@ activ()
     folder=$(pwd)
     ln -sfn "$folder" ~/Documents/custobar/custobar
 }
-
-# dc() {
-#     pushd ~/Documents/custobar/compose/
-#     docker-compose "$1"
-#     popd
-# }
 
 fco() {
     branch="$(git branch -l | fzf)"

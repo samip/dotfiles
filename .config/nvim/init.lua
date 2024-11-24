@@ -1,4 +1,6 @@
+require('plugins')
 require('lsp')
+require('telescope_settings')
 local map = vim.api.nvim_set_keymap  -- set global keymap
 
 local cmd = vim.cmd     				-- execute Vim commands
@@ -13,28 +15,10 @@ vim.g.loaded_netrwPlugin = 1
 -- set termguicolors to enable highlight groups
 vim.opt.termguicolors = true
 
-
--- To use git you need to install the plugin petertriho/cmp-git and uncomment lines below
--- Set configuration for specific filetype.
---[[ cmp.setup.filetype('gitcommit', {
-  sources = cmp.config.sources({
-    { name = 'git' },
-  }, {
-    { name = 'buffer' },
-  })
-})
-require("cmp_git").setup() ]]--
-
-
--- npm install -g tree-sitter neovim
----apt install --yes -- python3-venv
-
 -- set leader to comma
 g.mapleader = ','
 g.maplocalleader = ','
 
-require('plugins')
-require('telescope_settings')
 cmd('set termguicolors')
 require'colorizer'.setup()
 
@@ -62,7 +46,7 @@ opt.list = true               -- show whitespace
 
 cmd [[au Filetype lua setl omnifunc=v:lua.vim.lsp.omnifunc ]]
 -- remove whitespace on save
-cmd [[au BufWritePre * :%s/\s\+$//e]]
+-- cmd [[au BufWritePre * :%s/\s\+$//e]]
 
 -- highlight on yank
 exec([[
@@ -72,6 +56,13 @@ exec([[
   augroup end
 ]], false)
 
+-- Set up an autocmd for window resize
+vim.api.nvim_create_autocmd("VimResized", {
+  callback = function()
+    -- Execute your desired window command here
+    vim.cmd("wincmd =")  -- Adjust the window layout after resizing
+  end,
+})
 -- require('telescope').load_extension('fzf')
 
 vim.g.skip_ts_context_commentstring_module = true
@@ -98,7 +89,26 @@ if vim.fn.exists("+winbar") == 1 then
   opt.winbar = "%{%v:lua.require'jsonpath'.get()%} %=%m %f "
 end
 
+vim.cmd([[
+  command! V lua OpenConfig("~/.config/nvim/", "init.lua", "lua/plugins.lua")
+  command! I lua OpenConfig("~/.config/regolith3/", "Xresources", "i3/config.d/*")
+]])
 
+function OpenConfig(dir, file1, file2, file3)
+  local function open_files(name)
+    vim.cmd("args " .. name .. " | argdo vsplit")
+  end
+
+  vim.cmd("tabnew")                       -- Open a new tab
+  vim.cmd("cd " .. dir)                  -- Change directory to the specified `dir`
+  if file2 then                           -- If a second file is provided
+    open_files(file2)                  -- Open the first file
+  end
+  if file3 then                           -- If a third file is provided
+    open_files(file3)                  -- Open the first file
+  end
+  vim.cmd("vsp " .. file1)                  -- Open the first file
+end
 
 -- don't auto comment new lines
 cmd [[au BufEnter * set fo-=c fo-=r fo-=o]]
@@ -210,5 +220,12 @@ map('n', '<space>d', ':lua vim.lsp.buf.hover()<CR>', { noremap = true})
 -- vim.api.nvim_set_keymap('', 'T', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>", {})
 --vim.api.nvim_set_keymap('n', 'K', "<cmd> lua require'hop'.hint_lines({})<cr>", {})
 --vim.api.nvim_set_keymap('n', 'J', "<cmd> lua require'hop'.hint_lines({})<cr>", {})
+
+vim.cmd [[
+  highlight Normal guibg=none
+  highlight NonText guibg=none
+  highlight Normal ctermbg=none
+  highlight NonText ctermbg=none
+]]
 
 cmd('source ~/.config/nvim/addon.vim')
