@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Login info for raspberry pi
-rasp_user="sami"
+rasp_user="rpi"
 rasp_host="raspi"
 
 case $1 in
@@ -19,4 +19,4 @@ esac
 notify-send "TV $command"
 
 # Send on/standby command through HDMI CEC
-ssh "$rasp_user@$rasp_host" "echo '$command 0.0.0.1' | cec-client -s -d 1"
+ssh "$rasp_user@$rasp_host" "echo $command 0 | cec-client -s"
