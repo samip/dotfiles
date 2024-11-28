@@ -330,13 +330,4 @@ fi
 export XDG_RUNTIME_DIR="~/.tmp"
 
 # export BROWSER='eval "/mnt/c/Program\ Files/Google/Chrome\ Dev/Application/chrome.exe"'
-
-# Adding wsl-open as a browser for Bash for Windows
-if [[ $(uname -r) =~ (m|M)icrosoft ]]; then
-  if [[ -z $BROWSER ]]; then
-    export BROWSER=wsl-open
-  else
-    export BROWSER=$BROWSER:wsl-open
-  fi
-fi
-          
+export BROWSER="$HOME/.local/.bin/default_browser.sh"
