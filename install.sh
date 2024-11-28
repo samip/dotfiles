@@ -7,7 +7,7 @@ is_wsl() {
 add-apt-repository ppa:neovim-ppa/unstable
 sudo apt-get update
 sudo apt-get install -y tmux stow tig neovim xclip bat git fd-find ripgrep \
-    xclip screen curl ca-certificates build-essential
+    xclip screen curl ca-certificates build-essential unzip
 
 # Check if running in WSL
 if ! is_wsl; then
