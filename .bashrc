@@ -330,4 +330,4 @@ fi
 export XDG_RUNTIME_DIR="~/.tmp"
 
 # export BROWSER='eval "/mnt/c/Program\ Files/Google/Chrome\ Dev/Application/chrome.exe"'
-export BROWSER="$HOME/.local/.bin/default_browser.sh"
+export BROWSER="$HOME/.local/bin/default_browser.sh"
