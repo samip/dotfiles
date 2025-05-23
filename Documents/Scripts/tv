@@ -16,7 +16,7 @@ case $1 in
     exit 0
 esac
 
-notify-send "TV $command"
+# notify-send "TV $command"
 
 # Send on/standby command through HDMI CEC
 ssh "$rasp_user@$rasp_host" "echo $command 0 | cec-client -s"
