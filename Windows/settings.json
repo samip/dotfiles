@@ -1,0 +1,19 @@
+{
+    "window.commandCenter": true,
+    "vim.cursorStylePerMode.insert": "line",
+    "vim.cursorStylePerMode.normal": "block",
+    "vim.cursorStylePerMode.replace": "block-outline",
+    "vim.handleKeys": {
+        "<C-b>": false,
+        "<C-v>": false,
+        "<C-p>": false,
+        "<C-a>": false
+    },
+    "workbench.colorTheme": "Slime",
+    "cursor.aipreview.enabled": true,
+    "cursor.chat.alwaysSearchWeb": true,
+    "cursor.chat.showSuggestedFiles": true,
+    "cursor.general.enableShadowWorkspace": true,
+    "editor.lightbulb.enabled": "on",
+    "workbench.iconTheme": "ayu"
+}
