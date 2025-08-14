@@ -13,21 +13,21 @@ require("mason-lspconfig").setup({
   ensure_installed = { 'lua_ls', 'bashls', 'pyright', 'ts_ls', 'clangd' },
 })
 
-require("mason-lspconfig").setup_handlers {
-  -- The first entry (without a key) will be the default handler
-  -- and will be called for each installed server that doesn't have
-  -- a dedicated handler.
-  function (server_name) -- default handler (optional)
-    require("lspconfig")[server_name].setup {}
-  end,
-  -- Next, you can provide a dedicated handler for specific servers.
-  -- For example, a handler override for the `rust_analyzer`:
-  ["rust_analyzer"] = function ()
-    require("rust-tools").setup {}
-  end
-}
+-- require("mason-lspconfig").setup_handlers {
+--   -- The first entry (without a key) will be the default handler
+--   -- and will be called for each installed server that doesn't have
+--   -- a dedicated handler.
+--   function (server_name) -- default handler (optional)
+--     require("lspconfig")[server_name].setup {}
+--   end,
+--   -- Next, you can provide a dedicated handler for specific servers.
+--   -- For example, a handler override for the `rust_analyzer`:
+--   ["rust_analyzer"] = function ()
+--     require("rust-tools").setup {}
+--   end
+-- }
 
-local nvim_lsp = require('lspconfig')
+-- local nvim_lsp = require('lspconfig')
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -58,8 +58,8 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 end
 
-local configs = require'lspconfig/configs'
-local util = require 'lspconfig/util'
+-- local configs = require'lspconfig/configs'
+-- local util = require 'lspconfig/util'
 
 
 
@@ -67,19 +67,15 @@ local util = require 'lspconfig/util'
 -- map buffer local keybindings when the language server attaches
 local servers = { 'ts_ls', 'bashls', 'pyright', 'lua_ls', 'clangd' }
 
-for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup {
-    on_attach = on_attach,
-    flags = {
-      debounce_text_changes = 150,
-    }
-  }
-  -- set up cmp
-  local capabilities = require('cmp_nvim_lsp').default_capabilities()
-  nvim_lsp[lsp].setup {
-    capabilities = capabilities
-  }
-end
+
+--   nvim_lsp[lsp].setup {
+--     on_attach = on_attach,
+--     flags = {
+--       debounce_text_changes = 150,
+--     }
+--   }
+--   -- set up cmp
+-- end
 
 --nvim_lsp.vuels.setup {
 --  on_attach = function(client)

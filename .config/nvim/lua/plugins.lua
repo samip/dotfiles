@@ -70,49 +70,15 @@ return require('packer').startup(function(use)
   }
   use {'junegunn/fzf', dir = '~/.fzf', run = './install --all' }
   use 'dense-analysis/ale'
-  use {
-    'windwp/nvim-ts-autotag',
-    requires = 'nvim-treesitter/nvim-treesitter',
-    config = function()
-      require('nvim-ts-autotag').setup({
-        -- Defaults
-        opts = {
-          enable_close = true, -- Auto close tags
-          enable_rename = true, -- Auto rename pairs of tags
-          enable_close_on_slash = false -- Auto close on trailing </
-        }
-      })
-    end
-  }
   use 'norcalli/nvim-colorizer.lua'
   use 'williamboman/mason.nvim'
   use 'williamboman/mason-lspconfig.nvim'
-  use 'neovim/nvim-lspconfig'
-  use {
-    'ruifm/gitlinker.nvim',
-    requires = 'nvim-lua/plenary.nvim',
-    config = function()
-      require"gitlinker".setup({
-        opts = {
-          print_url = true,
-        },
-        callbacks = {
-          ["gitlab.custobar.com"] = require"gitlinker.hosts".get_gitlab_type_url,
-        },
-        -- default mapping to call url generation with action_callback
-        mappings = "<leader>gy"
-      })
-    end
-  }
-  use 'mfussenegger/nvim-dap'
   use 'sunjon/shade.nvim'
-  use 'drybalka/tree-climber.nvim'
   use 'tpope/vim-abolish'
   use 'phelipetls/jsonpath.nvim'
   use {
     'hrsh7th/nvim-cmp',
     requires = {
-      "Exafunction/codeium.vim",
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-path',
@@ -160,20 +126,6 @@ return require('packer').startup(function(use)
     end
   }
   use {
-    "Exafunction/codeium.vim",
-    requires = {
-      "nvim-lua/plenary.nvim",
-      "hrsh7th/nvim-cmp",
-    },
-    config = function()
-      vim.keymap.set('i', '<C-g>', function () return vim.fn['codeium#Accept']() end, { expr = true, silent = true })
-      vim.keymap.set('i', '<c-;>', function() return vim.fn['codeium#CycleCompletions'](1) end, { expr = true, silent = true })
-      vim.keymap.set('i', '<c-,>', function() return vim.fn['codeium#CycleCompletions'](-1) end, { expr = true, silent = true })
-      vim.keymap.set('i', '<c-x>', function() return vim.fn['codeium#Clear']() end, { expr = true, silent = true })
-      vim.keymap.set('n', '<c-a>', function() return vim.fn['codeium#Open']() end, { expr = true, silent = true })
-    end
-  }
-  use {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
     config = function()
@@ -203,29 +155,7 @@ return require('packer').startup(function(use)
       }
     end
   }
-  use {
-    'nvim-neotest/neotest',
-    requires = {
-      "nvim-neotest/nvim-nio",
-      "nvim-lua/plenary.nvim",
-      "antoinemadec/FixCursorHold.nvim",
-      "nvim-treesitter/nvim-treesitter",
-      "nvim-neotest/neotest-python",
-    },
-    config = function()
-      require("neotest").setup({
-        adapters = {
-          require("neotest-python")({
-            dap = { justMyCode = false },
-            args = {"--log-level", "DEBUG"},
-            runner = "pytest",
-            python = ".venv/bin/python",
-            pytest_discover_instances = true
-          })
-        }
-      })
-    end
-  }
+  use 'ojroques/nvim-osc52'
   use {
     'tamago324/lir.nvim',
     requires = {
