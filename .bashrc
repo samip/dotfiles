@@ -134,6 +134,7 @@ if [ -f ~/.localrc ]; then
 fi
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+[ -f ~/.fzf-git.sh ] && source ~/.fzf-git.sh
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
